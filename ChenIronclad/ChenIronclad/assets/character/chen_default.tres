@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://7qgkckar5vdw"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://kpm8k42n8yma" path="res://ChenIronclad/assets/character/spine/chen_dawnbreak.atlas" id="1_ia3id"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bom20tw5x8twj" path="res://ChenIronclad/assets/character/spine/chen_dawnbreak_combat.skel" id="2_vrmpe"]
+
+[resource]
+atlas_res = ExtResource("1_ia3id")
+skeleton_file_res = ExtResource("2_vrmpe")

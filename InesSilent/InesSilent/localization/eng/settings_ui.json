@@ -1,0 +1,13 @@
+{
+  "INESSILENT.mod_title" : "Ines Silent",
+  "INESSILENT-USE_INES_CARD_FRAME.title" : "Enable card frame",
+  "INESSILENT-USE_INES_CARD_FRAME.hover.desc" : "Enable card frame recolor for Ines (Silent)",
+  "INESSILENT-USE_INES_ENERGY.title" : "Enable energy counter",
+  "INESSILENT-USE_INES_ENERGY.hover.desc" : "Enable energy counter recolor for Ines (Silent)",
+  "INESSILENT-USE_INES_MULT_ARM.title" : "Enable mutliplayer arm",
+  "INESSILENT-USE_INES_MULT_ARM.hover.desc" : "Enable custom multiplayer arm (rock/paper/scissor/point) for Ines (Silent)",
+  "INESSILENT-USE_WISADELE_POTION.title" : "Enable Wis'Adele April fools",
+  "INESSILENT-USE_WISADELE_POTION.hover.desc" : "Change poison logo to Wis'Adele april fools skin",
+  "INESSILENT-RED_SHIV_COLOR.title" : "Enable red shiv",
+  "INESSILENT-RED_SHIV_COLOR.hover.desc" : "Change shiv color to red (because i thinks it's cool)"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "InesSilent",
+  "name": "Ines Silent",
+  "author": "thunninoi",
+  "description": "Ines from Arknights as The Silent",
+  "version": "v1.0.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": ["BaseLib"],
+  "affects_gameplay": false
+}

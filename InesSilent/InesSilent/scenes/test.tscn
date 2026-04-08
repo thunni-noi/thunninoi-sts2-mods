@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckjclirk8n0m0"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c85ua71r4utwc" path="res://InesSilent/assets/character/ines_rest.tres" id="1_3dbsa"]
+[ext_resource type="Material" uid="uid://do6ngijsm5tlk" path="res://InesSilent/assets/ui/cards/frames/card_frame_ines.tres" id="2_eus0c"]
+[ext_resource type="Texture2D" uid="uid://cwvw75o" path="res://InesSilent/assets/ui/cards/frames/card_frame_skill_s.tres" id="3_1ijdq"]
+
+[node name="Test" type="Node2D"]
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_3dbsa")
+preview_skin = "Default"
+preview_animation = "glory_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(150, 0)
+
+[node name="CardFrameSkillS" type="Sprite2D" parent="."]
+material = ExtResource("2_eus0c")
+position = Vector2(1456, -23)
+texture = ExtResource("3_1ijdq")

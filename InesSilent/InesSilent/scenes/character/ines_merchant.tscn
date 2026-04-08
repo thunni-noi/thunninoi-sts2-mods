@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://yirtxm2nffuj"]
+
+[ext_resource type="Script" uid="uid://b14bxy4f2i7ih" path="res://InesSilentCode/core/InesMerchantCharacter.cs" id="1_tiw17"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b8mbx0m7uc6yr" path="res://InesSilent/assets/character/ines_default.tres" id="2_tiw17"]
+
+[node name="SilentMerchant" type="Node2D"]
+script = ExtResource("1_tiw17")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_tiw17")
+preview_skin = "Default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 5.4
+scale = Vector2(0.9, 0.9)

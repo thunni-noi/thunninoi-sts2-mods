@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cslfj7h"]
+
+[ext_resource type="Texture2D" uid="uid://d17m2gnaj26t8" path="res://ChenIronclad/assets/ui/cards/frames/ui_atlas_0.png" id="1_6p0ku"]
+
+[resource]
+atlas = ExtResource("1_6p0ku")
+region = Rect2(1320, 83, 598, 844)

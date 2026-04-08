@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://do6ngijsm5tlk"]
+
+[ext_resource type="Shader" uid="uid://b8xbl0d0nv5jj" path="res://ChenIronclad/assets/ui/cards/frames/hsv.gdshader" id="1_ju2lg"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_ju2lg")
+shader_parameter/h = 0.650000030875
+shader_parameter/s = 0.70000003325
+shader_parameter/v = 1.0
