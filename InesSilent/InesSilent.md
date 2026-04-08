@@ -28,12 +28,12 @@ Slay The Spire 2
  Most of the assets are property of **Hypergryph** and are taken from **Arknights**. I do not claim any rights to any of assets used in this repository. This project is strictly fan-made and non-commercial.
 
  ## Screenshots
-![](screenshots\characterselect.jpg)
-![](screenshots\combat.jpg)
-![](screenshots\map.jpg)
-![](screenshots\rest.jpg)
-![](screenshots\shop.jpg)
-![](screenshots\loot.jpg)
+![](screenshots/characterselect.jpg)
+![](screenshots/combat.jpg)
+![](screenshots/map.jpg)
+![](screenshots/rest.jpg)
+![](screenshots/shop.jpg)
+![](screenshots/loot.jpg)
 
 ### Me yapping
 Tried adding more stuff into this mods, her animation is hard to work with since I cannot access the pc client myself to get high resolution of the sprite, only found base sprite from [this github](https://github.com/isHarryh/Ark-Models), If you look really closely to her sprite you'd see that her sword(needle thingy?) has lower resolution than her body. Has planned to add some card texture in the future 

@@ -2,9 +2,9 @@
 My collection of Slay The Spire 2 mods
 
 ## Mod Lists
-[Chen Ironclad](ChenIronclad\ChenIronclad.md)           |  [Ines Silent](InesSilent\InesSilent.md)
+[Chen Ironclad](ChenIronclad/ChenIronclad.md)           |  [Ines Silent](InesSilent/InesSilent.md)
 :-------------------------:|:-------------------------:
-![](ChenIronclad\ChenIronclad\mod_image.png)  |  ![](InesSilent\InesSilent\mod_image.png)
+![](ChenIronclad/ChenIronclad/mod_image.png)  |  ![](InesSilent/InesSilent/mod_image.png)
 
 ## Disclaimer
 Most of the assets are property of **Hypergryph** and are taken from **Arknights**. I do not claim any rights to any of assets used in this repository. This project is strictly fan-made and non-commercial.
