@@ -20,6 +20,8 @@ public partial class InesInitialize : Node
 		Harmony harmony = new(ModId);
 		ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
 		ModConfigRegistry.Register(ModId, new InesConfig());
+		//InesConfig.DebugMode = true;
 		harmony.PatchAll();
+		//Logger.Info($"[INES] Patches applied: {harmony.GetPatchedMethods().Count()}");
 	}
 }

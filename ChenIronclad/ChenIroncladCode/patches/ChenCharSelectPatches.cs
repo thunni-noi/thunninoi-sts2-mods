@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace ChenIronclad.ChenIroncladCode.patches;
 
 [HarmonyPatch]
-public class CharacterSelectPatch
+public class ChenCharSelectPatches
 {
     private const string SceneCharSelBg = "res://ChenIronclad/scenes/ui/chen_charselect_bg.tscn";
     private const string SpriteCharSelPortrait = "res://ChenIronclad/assets/ui/characterSelect/chen_portrait.png";
@@ -16,9 +16,11 @@ public class CharacterSelectPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectBg")]
     [HarmonyPrefix]
-    private static bool CharSelectBgPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CharSelectBgPatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CharacterSelectBg from {__instance.Id}");
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(SceneCharSelBg))
         {
             Log.Error($"[CHEN] Cannot find path : {SceneCharSelBg}");
@@ -31,9 +33,11 @@ public class CharacterSelectPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectIconPath")]
     [HarmonyPrefix]
-    private static bool CharSelectPortraitPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CharSelectPortraitPatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CharacterSelectIconPath from {__instance.Id}");
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(SpriteCharSelPortrait))
         {
             Log.Error($"[CHEN] Cannot find path : {SpriteCharSelPortrait}");
@@ -46,9 +50,11 @@ public class CharacterSelectPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectTransitionPath")]
     [HarmonyPrefix]
-    private static bool CharTransitionPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CharTransitionPatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CharacterSelectTransitionPath from {__instance.Id}");
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharSelTransition))
         {
             Log.Error($"[CHEN] Cannot find path : {CharSelTransition}");

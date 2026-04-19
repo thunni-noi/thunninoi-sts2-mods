@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace ChenIronclad.ChenIroncladCode.patches;
 
 [HarmonyPatch]
-public class UiPatch
+public class ChenUiPatch
 {
     private const string CharacterIcon = "res://ChenIronclad/assets/ui/icon/character_icon_chen.png";
     private const string CharacterIconOutline = "res://ChenIronclad/assets/ui/icon/character_icon_outline_chen.png";
@@ -20,9 +20,10 @@ public class UiPatch
 
     [HarmonyPatch(typeof(CharacterModel), "get_MapMarkerPath")]
     [HarmonyPrefix]
-    private static bool MapMarkerPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_MapMarkerPatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharacterMapMarker))
         {
             Log.Error($"[CHEN] Cannot find resource : {CharacterMapMarker}");
@@ -34,9 +35,10 @@ public class UiPatch
 
     [HarmonyPatch(typeof(CharacterModel), "get_IconTexture")]
     [HarmonyPrefix]
-    private static bool CharacterIconPatch(CharacterModel __instance, ref Texture2D __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CharacterIconPatch(CharacterModel __instance, ref Texture2D __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharacterIcon))
         {
             Log.Error($"[CHEN] Cannot find resource : {CharacterIcon}");
@@ -49,9 +51,10 @@ public class UiPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_IconOutlineTexture")]
     [HarmonyPrefix]
-    private static bool CharacterIconOutlinePatch(CharacterModel __instance, ref Texture2D __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CharacterIconOutlinePatch(CharacterModel __instance, ref Texture2D __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharacterIconOutline))
         {
             Log.Error($"[CHEN] Cannot find resource : {CharacterIconOutline}");
@@ -65,9 +68,10 @@ public class UiPatch
     // sometimes singleplayer won't load patched texture, this is for safeguard i guess?
     [HarmonyPatch(typeof(CharacterModel), "get_IconPath")]
     [HarmonyPrefix]
-    private static bool CharacterIconScenePatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CharacterIconScenePatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(SceneCharacterIcon))
         {
             Log.Error($"[CHEN] Cannot find resource : {SceneCharacterIcon}");
@@ -79,10 +83,11 @@ public class UiPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmPointingTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmRockPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_ArmRockPatch(CharacterModel __instance, ref string __result)
     {
         if (!ChenConfig.UseChenMultArm) return true;
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharacterArmPoint)) return true;
         __result = CharacterArmPoint;
         return false;
@@ -90,10 +95,11 @@ public class UiPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmRockTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmPaperPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_ArmPaperPatch(CharacterModel __instance, ref string __result)
     {
         if (!ChenConfig.UseChenMultArm) return true;
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharacterArmRock)) return true;
         __result = CharacterArmRock;
         return false;
@@ -101,10 +107,11 @@ public class UiPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmPaperTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmScissorPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_ArmScissorPatch(CharacterModel __instance, ref string __result)
     {
         if (!ChenConfig.UseChenMultArm) return true;
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharacterArmPaper)) return true;
         __result = CharacterArmPaper;
         return false;
@@ -112,10 +119,11 @@ public class UiPatch
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmScissorsTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmPointingPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_ArmPointingPatch(CharacterModel __instance, ref string __result)
     {
         if (!ChenConfig.UseChenMultArm) return true;
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CharacterArmScissor)) return true;
         __result = CharacterArmScissor;
         return false;

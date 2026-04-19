@@ -9,5 +9,7 @@
   "INESSILENT-USE_WISADELE_POTION.title" : "Enable Wis'Adele April fools",
   "INESSILENT-USE_WISADELE_POTION.hover.desc" : "Change poison logo to Wis'Adele april fools skin",
   "INESSILENT-RED_SHIV_COLOR.title" : "Enable red shiv",
-  "INESSILENT-RED_SHIV_COLOR.hover.desc" : "Change shiv color to red (because i thinks it's cool)"
+  "INESSILENT-RED_SHIV_COLOR.hover.desc" : "Change shiv color to red (because i thinks it's cool)",
+  "INESSILENT-DEBUG_MODE.title" : "Enable debug mode",
+  "INESSILENT-DEBUG_MODE.hover.desc" : "Enable debug mode that will print debug in logs, usually disable to prevent log flooding"
 }

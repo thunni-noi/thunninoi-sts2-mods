@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace ChenIronclad.ChenIroncladCode.patches;
 
 [HarmonyPatch]
-public class CardsPatch
+public class ChenCardPatches
 {
 
     private const string CardFrameMaterial = "res://ChenIronclad/assets/ui/cards/frames/card_frame_chen.tres";
@@ -15,8 +15,10 @@ public class CardsPatch
     
     [HarmonyPatch(typeof(CardPoolModel), "get_FrameMaterialPath")]
     [HarmonyPrefix]
-    private static bool CardFramePatch(CardPoolModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CardFramePatch(CardPoolModel __instance, ref string __result)
     {
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CardPoolModel.FrameMaterialPath from {__instance.Id}");
         if (!ChenConfig.UseChenCardFrame) return true;
         if (!((__instance) is IroncladCardPool)) return true;
         __result = CardFrameMaterial;
@@ -25,14 +27,16 @@ public class CardsPatch
 
     [HarmonyPatch(typeof(CharacterModel), "get_TrailPath")]
     [HarmonyPrefix]
-    private static bool CardTrailPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CardTrailPatch(CharacterModel __instance, ref string __result)
     {
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CharacterModel.TrailPath from {__instance.Id}");
         if (!ChenConfig.UseChenCardFrame) return true;
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (!ChenUtils.IsIronclad(__instance)) return true;
         if (!ResourceLoader.Exists(CardTrailVfx))
         {
             Log.Error($"[CHEN] Cannot find path : {CardTrailVfx}");
-            return true;
+            return false;
         }
         __result = CardTrailVfx;
         return false;

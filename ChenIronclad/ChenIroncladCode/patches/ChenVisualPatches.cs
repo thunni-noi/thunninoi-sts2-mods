@@ -11,19 +11,20 @@ using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 namespace ChenIronclad.ChenIroncladCode.patches;
 
 [HarmonyPatch]
-public class CharacterVisuals
+public class ChenVisualPatches
 {
     private const string SpriteDefaultPath = "res://ChenIronclad/scenes/character/chen_dawnstreak.tscn";
     private const string SpriteMerchantPath = "res://ChenIronclad/scenes/character/chen_dawnstreak_merchant.tscn";
     private const string SpriteRestPath = "res://ChenIronclad/scenes/character/chen_dawnstreak_rest_site.tscn";
     private const string HellraiserScene = "res://ChenIronclad/scenes/misc/chen_hellraiser_sword_vfx.tscn";
 
-    [HarmonyPatch(typeof(CharacterModel), "CreateVisuals")]
+    [HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.CreateVisuals))]
     [HarmonyPrefix]
-    private static bool CombatVisualsPatch(CharacterModel __instance, ref NCreatureVisuals __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_CombatVisualsPatch(CharacterModel __instance, ref NCreatureVisuals __result)
     {
-        //Log.Debug($"[CHEN] CombatVisualsPatch has been called.");
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CharacterModel.CreateVisuals from {__instance.Id}");
+        if (!ChenUtils.IsIronclad(__instance)) return true;
 
         if (!ResourceLoader.Exists(SpriteDefaultPath))
         {
@@ -31,17 +32,19 @@ public class CharacterVisuals
             return true;
         }
 
-        PackedScene defaultScene = ResourceLoader.Load<PackedScene>(SpriteDefaultPath, (string)null, ResourceLoader.CacheMode.Reuse);
-        NCreatureVisuals characterVisual = NodeFactory<NCreatureVisuals>.CreateFromScene(defaultScene);
+        var defaultScene = ResourceLoader.Load<PackedScene>(SpriteDefaultPath, (string)null, ResourceLoader.CacheMode.Reuse);
+        var characterVisual = NodeFactory<NCreatureVisuals>.CreateFromScene(defaultScene);
         __result = characterVisual;
         return false;
     }
 
     [HarmonyPatch(typeof(CharacterModel), "get_MerchantAnimPath")]
     [HarmonyPrefix]
-    private static bool MerchantVisualsPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_MerchantVisualsPatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CharacterModel.MerchantAnimPath from {__instance.Id}");
+        if (!ChenUtils.IsIronclad(__instance)) return true;
 
         if (!ResourceLoader.Exists(SpriteMerchantPath))
         {
@@ -54,9 +57,11 @@ public class CharacterVisuals
     
     [HarmonyPatch(typeof(CharacterModel), "get_RestSiteAnimPath")]
     [HarmonyPrefix]
-    private static bool RestVisualPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Chen_RestVisualPatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsIronclad(__instance)) return true;
+        if (ChenConfig.DebugMode) Log.Info($"[CHEN] Patching CharacterModel.RestSiteAnimPath from {__instance.Id}");
+        if (!ChenUtils.IsIronclad(__instance)) return true;
 
         if (!ResourceLoader.Exists(SpriteRestPath))
         {

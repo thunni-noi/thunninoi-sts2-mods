@@ -1,6 +1,5 @@
 ﻿using Godot;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Potions;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -9,7 +8,7 @@ using MegaCrit.Sts2.Core.Nodes.Potions;
 namespace InesSilent.InesSilentCode;
 
 [HarmonyPatch]
-public class SilentUiPatches
+public class InesUiPatches
 {
      private const string CharacterIcon = "res://InesSilent/assets/ui/icon/character_icon_ines.png";
     private const string CharacterIconOutline = "res://InesSilent/assets/ui/icon/character_icon_outline_ines.png";
@@ -27,18 +26,20 @@ public class SilentUiPatches
 
     [HarmonyPatch(typeof(CharacterModel), "get_MapMarkerPath")]
     [HarmonyPrefix]
-    private static bool MapMarkerPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_MapMarkerPatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(CharacterMapMarker)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(CharacterMapMarker)) return true; 
         __result = CharacterMapMarker;
         return false;
     }
 
     [HarmonyPatch(typeof(CharacterModel), "get_IconTexture")]
     [HarmonyPrefix]
-    private static bool CharacterIconPatch(CharacterModel __instance, ref Texture2D __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_CharacterIconPatch(CharacterModel __instance, ref Texture2D __result)
     {
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(CharacterIcon)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(CharacterIcon)) return true; 
         Texture2D charIcon =  ResourceLoader.Load<Texture2D>(CharacterIcon);
         __result = charIcon;
         return false;
@@ -46,60 +47,66 @@ public class SilentUiPatches
     
     [HarmonyPatch(typeof(CharacterModel), "get_IconOutlineTexture")]
     [HarmonyPrefix]
-    private static bool CharacterIconOutlinePatch(CharacterModel __instance, ref Texture2D __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_CharacterIconOutlinePatch(CharacterModel __instance, ref Texture2D __result)
     {
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(CharacterIconOutline)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(CharacterIconOutline)) return true; 
         Texture2D charIcon =  ResourceLoader.Load<Texture2D>(CharacterIconOutline);
         __result = charIcon;
         return false;
     }
     
-    // sometimes singleplayer won't load patched texture, this is for safeguard i guess?
+    // singleplay top icon
     [HarmonyPatch(typeof(CharacterModel), "get_IconPath")]
     [HarmonyPrefix]
-    private static bool CharacterIconScenePatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_CharacterIconScenePatch(CharacterModel __instance, ref string __result)
     {
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(SceneCharacterIcon)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(SceneCharacterIcon)) return true; 
         __result = SceneCharacterIcon;
         return false;
     }
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmPointingTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmRockPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_ArmPointing(CharacterModel __instance, ref string __result)
     {
         if (!InesConfig.UseInesMultArm) return true;
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(CharacterArmPoint)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(CharacterArmPoint)) return true; 
         __result = CharacterArmPoint;
         return false;
     }
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmRockTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmPaperPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_ArmRock(CharacterModel __instance, ref string __result)
     {
         if (!InesConfig.UseInesMultArm) return true;
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(CharacterArmRock)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(CharacterArmRock)) return true; 
         __result = CharacterArmRock;
         return false;
     }
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmPaperTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmScissorPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_ArmPaper(CharacterModel __instance, ref string __result)
     {
         if (!InesConfig.UseInesMultArm) return true;
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(CharacterArmScissor)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(CharacterArmPaper)) return true; 
         __result = CharacterArmPaper;
         return false;
     }
     
     [HarmonyPatch(typeof(CharacterModel), "get_ArmScissorsTexturePath")]
     [HarmonyPrefix]
-    private static bool ArmPointingPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_ArmScissor(CharacterModel __instance, ref string __result)
     {
         if (!InesConfig.UseInesMultArm) return true;
-        if (!Utils.IsSilent(__instance) || !Utils.ResourceAvailable(CharacterArmPoint)) return true; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(CharacterArmScissor)) return true; 
         __result = CharacterArmScissor;
         return false;
     }
@@ -118,18 +125,18 @@ public class SilentUiPatches
     }
     
     [HarmonyPatch(typeof(PotionModel), "get_Image")]
-    [HarmonyPrefix]
-    private static bool WisadlePotionThrownPatch(PotionModel __instance, ref Texture2D __result)
+    [HarmonyPostfix]
+    private static void WisadlePotionThrownPatch(PotionModel __instance, ref Texture2D __result)
     {
-        if (!InesConfig.UseWisadelePotion) return true;
-        if (!(__instance is PoisonPotion)) return true;
+        if (!InesConfig.UseWisadelePotion) return;
+        if (!(__instance is PoisonPotion)) return;
         Texture2D texture = ResourceLoader.Load<Texture2D>(WisadeleTexture, null, ResourceLoader.CacheMode.Reuse);
         __result = texture;
-        return false;
     }
     
     [HarmonyPatch(typeof(PowerModel), "get_Icon")]
     [HarmonyPrefix]
+    [HarmonyPriority(Priority.First)]
     private static bool WisadelePowerPatch(PowerModel __instance, ref Texture2D __result)
     {
         if (!InesConfig.UseWisadelePotion) return true;
@@ -141,6 +148,7 @@ public class SilentUiPatches
     
     [HarmonyPatch(typeof(PowerModel), "get_BigIcon")]
     [HarmonyPrefix]
+    [HarmonyPriority(Priority.First)]
     private static bool WisadelePowerBigPatch(PowerModel __instance, ref Texture2D __result)
     {
         if (!InesConfig.UseWisadelePotion) return true;

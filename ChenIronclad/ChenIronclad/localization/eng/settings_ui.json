@@ -7,5 +7,7 @@
   "CHENIRONCLAD-USE_CHEN_MULT_ARM.title" : "Enable mutliplayer arm",
   "CHENIRONCLAD-USE_CHEN_MULT_ARM.hover.desc" : "Enable custom multiplayer arm (rock/paper/scissor/point) for Chen(Ironclad)",
   "CHENIRONCLAD-USE_CHIXIAO_HELLRAISER.title" : "Enable Chi Xiao Hellraiser",
-  "CHENIRONCLAD-USE_CHIXIAO_HELLRAISER.hover.desc" : "Replace sword animation of Hellraiser with Chi Xiao"
+  "CHENIRONCLAD-USE_CHIXIAO_HELLRAISER.hover.desc" : "Replace sword animation of Hellraiser with Chi Xiao",
+  "CHENIRONCLAD-DEBUG_MODE.title" : "Enable debug mode",
+  "CHENIRONCLAD-DEBUG_MODE.hover.desc" : "Enable debug mode that will print debug in logs, usually disable to prevent log flooding"
 }
