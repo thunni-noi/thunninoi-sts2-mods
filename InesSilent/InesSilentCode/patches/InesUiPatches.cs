@@ -125,13 +125,15 @@ public class InesUiPatches
     }
     
     [HarmonyPatch(typeof(PotionModel), "get_Image")]
-    [HarmonyPostfix]
-    private static void WisadlePotionThrownPatch(PotionModel __instance, ref Texture2D __result)
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.First)]
+    private static bool WisadlePotionThrownPatch(PotionModel __instance, ref Texture2D __result)
     {
-        if (!InesConfig.UseWisadelePotion) return;
-        if (!(__instance is PoisonPotion)) return;
+        if (!InesConfig.UseWisadelePotion) return true;
+        if (!(__instance is PoisonPotion)) return true;
         Texture2D texture = ResourceLoader.Load<Texture2D>(WisadeleTexture, null, ResourceLoader.CacheMode.Reuse);
         __result = texture;
+        return false;
     }
     
     [HarmonyPatch(typeof(PowerModel), "get_Icon")]

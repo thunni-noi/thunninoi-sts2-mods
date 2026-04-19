@@ -16,34 +16,41 @@ public class InesVisualPatches
     private const string SpriteRestPath = "res://InesSilent/scenes/character/ines_rest_site.tscn";
 
     [HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.CreateVisuals))]
-    [HarmonyPostfix]
-    private static void Ines_CombatVisualsPatch(CharacterModel __instance, ref NCreatureVisuals __result)
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_CombatVisualsPatch(CharacterModel __instance, ref NCreatureVisuals __result)
     {
-        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(SpriteDefaultPath)) return; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(SpriteDefaultPath)) return true; 
         InesUtils.Logger("Patching CharacterModel.CreateVisuals");
         PackedScene defaultScene = ResourceLoader.Load<PackedScene>(SpriteDefaultPath, (string)null, ResourceLoader.CacheMode.Reuse);
         NCreatureVisuals characterVisual = NodeFactory<NCreatureVisuals>.CreateFromScene(defaultScene);
         __result = characterVisual;
+        return false;
     }
 
     [HarmonyPatch(typeof(CharacterModel), "get_MerchantAnimPath")]
-    [HarmonyPostfix]
-    private static void Ines_MerchantVisualsPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_MerchantVisualsPatch(CharacterModel __instance, ref string __result)
     {
-        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(SpriteMerchantPath)) return; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(SpriteMerchantPath)) return true; 
         __result = SpriteMerchantPath;
+        return false;
     }
     
     [HarmonyPatch(typeof(CharacterModel), "get_RestSiteAnimPath")]
-    [HarmonyPostfix]
-    private static void Ines_RestVisualPatch(CharacterModel __instance, ref string __result)
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.First)]
+    private static bool Ines_RestVisualPatch(CharacterModel __instance, ref string __result)
     {
-        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(SpriteRestPath)) return; 
+        if (!InesUtils.IsSilent(__instance) || !InesUtils.ResourceAvailable(SpriteRestPath)) return true; 
         __result = SpriteRestPath;
+        return false;
     }
 
     [HarmonyPatch(typeof(NShivThrowVfx), "ApplyTint")]
     [HarmonyPrefix]
+    [HarmonyPriority(Priority.First)]
     private static bool Ines_ShivThrowVfxPatch(NShivThrowVfx __instance, ref Color tint)
     {   
         if (InesConfig.RedShivColor) tint = new Color(217f / 255f, 0f, 0f, 1f);
