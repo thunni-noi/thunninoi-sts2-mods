@@ -30,6 +30,6 @@ public class InesUtils
     public static void Logger(string msg)
     {
         if (!InesConfig.DebugMode) return;
-        Log.Info("[INES] " + msg);
+        InesInitialize.Logger.Info("[INES] " + msg);
     }
 }
