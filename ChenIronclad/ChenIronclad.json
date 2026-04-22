@@ -3,7 +3,7 @@
   "name": "Chen Ironclad",
   "author": "thunninoi",
   "description": "Chen The Dawnstreak from Arknights as The Ironclad",
-  "version": "v1.0.1",
+  "version": "v1.0.2",
   "has_pck": true,
   "has_dll": true,
   "dependencies": ["BaseLib"],

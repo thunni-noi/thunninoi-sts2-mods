@@ -3,7 +3,7 @@
   "name": "Ines Silent",
   "author": "thunninoi",
   "description": "Ines from Arknights as The Silent",
-  "version": "v1.0.1",
+  "version": "v1.0.2",
   "has_pck": true,
   "has_dll": true,
   "dependencies": ["BaseLib"],
