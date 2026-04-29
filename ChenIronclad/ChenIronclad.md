@@ -3,7 +3,7 @@
  > <"Insert Cool Chen's quote here but I don't understand Chinese enough to translate them">
 
  ## Dependencies
- This mod required [Baselib](https://github.com/Alchyr/BaseLib-StS2) version [0.2.6](https://github.com/Alchyr/BaseLib-StS2/releases/tag/v0.2.6) or later
+ This mod required [Baselib](https://github.com/Alchyr/BaseLib-StS2) version [3.0.6](https://github.com/Alchyr/BaseLib-StS2/releases) or later
 
  ## Installation
  Put entire mods inside mods folder, do the same with baseLib. It should look like this

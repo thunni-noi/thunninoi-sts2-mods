@@ -1,19 +1,19 @@
 # Civilight Eterna Defect
  Civilight Eterna from Arknights As The Defect
- > WIP ignore everything below
+ > Keep striding forward. I shall be at your side.
 
  ## Dependencies
- This mod required [Baselib](https://github.com/Alchyr/BaseLib-StS2) version [0.2.6](https://github.com/Alchyr/BaseLib-StS2/releases/tag/v0.2.6) or later
+ This mod required [Baselib](https://github.com/Alchyr/BaseLib-StS2) version [3.1.0](https://github.com/Alchyr/BaseLib-StS2/releases/) or later
 
  ## Installation
  Put entire mods inside mods folder, do the same with baseLib. It should look like this
  ```
 Slay The Spire 2
 └── mods
-    ├── ChenIronclad
-    │   ├── ChenIronclad.dll
-    │   ├── ChenIronclad.json
-    │   └── ChenIronclad.pck
+    ├── CEdefect
+    │   ├── CEdefect.dll
+    │   ├── CEdefect.json
+    │   └── CEdefect.pck
     └── baselib
         ├── BaseLib.dll
         ├── BaseLib.json
@@ -28,10 +28,14 @@ Slay The Spire 2
  Most of the assets are property of **Hypergryph** and are taken from **Arknights**. I do not claim any rights to any of assets used in this repository. This project is strictly fan-made and non-commercial.
 
  ## Screenshots
-![](screenshots/characterselect.jpg)
-![](screenshots/combat.jpg)
-![](screenshots/map.jpg)
-![](screenshots/hands.jpg)
+![](screenshots/charselect.jpg)
+![](screenshots/charselect_epoque.jpg)
+![](screenshots/default_anim.jpg)
+![](screenshots/epoque_combat.jpg)
+![](screenshots/orbs.jpg)
+![](screenshots/relics.jpg)
 
 ### Me yapping
-This is my first time trying my hands at Godot modding, admittedly spent too much time trying to figures things out. Actually the mod as bare bone as a bone can bare(???) the first time I finished it but while I was working on Ines mod it keep bugging so I came back to polish it up a (lot) bit. Initially had planned to replace some card's texture as well but due to my artistic abilites doesn't exactly reach the point I'd be confident enough to show them off yet (as you can see from the multiplayer arm image) and I don't want to use genAI. I suppose I could use some in-game cg as card's texture but I'll let the future me handle it if I ever come back to this mod.
+Totally unbiased character for arguably the best character in Slay The Spire2 , trust me.
+
+I did severely underestimate how much time this would take, turn out having to source out orb sprite and adding custom animation into the game was not as straightforward as I hoped. This mod code is a total mess that I couln't fathom fixing them if they gone wrong. Also during development BaseLib did have a lot of changes which kind of messed up my code a little bit. That's the catch for making a game where modding resource is still developing and early access game i gues.
