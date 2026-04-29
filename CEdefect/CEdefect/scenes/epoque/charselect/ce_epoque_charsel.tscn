@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://da4i7st05627h"]
+
+[ext_resource type="Script" uid="uid://c0mmv6dbk4ygl" path="res://CEdefectCode/Core/CE_SkinSelector.cs" id="1_pipds"]
+[ext_resource type="Texture2D" uid="uid://2kio7gseqmf7" path="res://CEdefect/assets/shared/flowerbed.png" id="1_ugq4w"]
+[ext_resource type="Script" uid="uid://cstenl5g7fpgl" path="res://CEdefect/scenes/epoque/charselect/civilight_epoque_l2d.gd" id="2_72y4a"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bkv0mhhodskxx" path="res://CEdefect/assets/epoque/character_select/ce_epoque_charselect.tres" id="3_pipds"]
+[ext_resource type="Texture2D" uid="uid://bcxb6y1x56akx" path="res://CEdefect/assets/shared/misc/arrow/event_button_default.png" id="4_72y4a"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://CEdefect/assets/shared/misc/fonts/kreon_bold_shared.tres" id="5_cokkw"]
+[ext_resource type="Texture2D" uid="uid://ipxrij7u51qq" path="res://CEdefect/assets/shared/misc/arrow/event_button_pressed.png" id="5_pipds"]
+[ext_resource type="Texture2D" uid="uid://cjvfg101c3m06" path="res://CEdefect/assets/shared/misc/arrow/event_button_hover.png" id="6_mp3cp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8c00i"]
+font = ExtResource("5_cokkw")
+font_size = 32
+outline_size = 14
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DefectBg" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -521.0
+offset_right = 1600.0
+offset_bottom = 679.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+mouse_filter = 2
+script = ExtResource("1_pipds")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(1002, 489)
+scale = Vector2(1.273253, 1.273253)
+texture = ExtResource("1_ugq4w")
+
+[node name="SpriteController" type="Node2D" parent="." node_paths=PackedStringArray("civilight_l2d")]
+show_behind_parent = true
+position = Vector2(1172.0001, 1691.0001)
+scale = Vector2(1.3704708, 1.3704708)
+script = ExtResource("2_72y4a")
+civilight_l2d = NodePath("../Civilight_l2d")
+
+[node name="Civilight_l2d" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_pipds")
+preview_skin = "Default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(1282, 1823)
+scale = Vector2(1.6091964, 1.6091964)
+
+[node name="SkinController" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1626.0
+offset_top = 940.0
+offset_right = 1807.0
+offset_bottom = 980.0
+mouse_filter = 1
+
+[node name="CycleButton" type="TextureButton" parent="SkinController"]
+modulate = Color(0.3632725, 0.010386099, 0.18746659, 0.6901961)
+layout_mode = 0
+offset_left = -31.999996
+offset_top = -16.999998
+offset_right = 252.0
+offset_bottom = 93.0
+scale = Vector2(0.84734297, 0.72734296)
+texture_normal = ExtResource("4_72y4a")
+texture_pressed = ExtResource("5_pipds")
+texture_hover = ExtResource("6_mp3cp")
+
+[node name="SkinName" type="Label" parent="SkinController"]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 42.0
+text = "Change Skins"
+label_settings = SubResource("LabelSettings_8c00i")
+
+[connection signal="animation_completed" from="Civilight_l2d" to="SpriteController" method="_on_civilight_l_2d_animation_completed"]

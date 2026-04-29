@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://fer4osrhbg60"]
+
+[ext_resource type="Script" uid="uid://sh3xu0e58e8p" path="res://CEdefectCode/Core/CE_MerchantVisuals.cs" id="1_reny1"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://t30dg3mf3jcc" path="res://CEdefect/assets/default/character/ce_default.tres" id="2_mxdi8"]
+
+[node name="DefectMerchant" type="Node2D"]
+script = ExtResource("1_reny1")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_mxdi8")
+preview_skin = "Default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 5.4
+position = Vector2(0, 28)
+scale = Vector2(0.95, 0.95)

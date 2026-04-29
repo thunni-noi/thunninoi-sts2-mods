@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ducdj8nua33ww"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://biut2wiidnhpi" path="res://CEdefect/assets/shared/orbs/amiya_orb/amiya_orb.tres" id="1_3mru2"]
+[ext_resource type="Shader" uid="uid://2ow2oyydkbb1" path="res://CEdefect/scenes/shared/orbs/outline_orb.gdshader" id="1_kul0h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_680r1"]
+shader = ExtResource("1_kul0h")
+shader_parameter/outline_color = Color(0.9411765, 0.7921569, 0.6901961, 0.54901963)
+shader_parameter/outline_width = 4.00000019
+
+[node name="amiya_orb" type="Node2D"]
+
+[node name="OrbRender" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_680r1")
+
+[node name="OrbSprite" type="SpineSprite" parent="OrbRender"]
+skeleton_data_res = ExtResource("1_3mru2")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.1, 0.1)

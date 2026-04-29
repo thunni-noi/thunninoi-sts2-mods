@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://d3pl0htad08w3"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://q2cf32yk8sjq" path="res://CEdefect/assets/default/character/spine/ce_default.atlas" id="1_hau1l"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cye81hbu4h0m8" path="res://CEdefect/assets/default/character/spine/ce_default_rest.skel" id="2_qef8k"]
+
+[resource]
+atlas_res = ExtResource("1_hau1l")
+skeleton_file_res = ExtResource("2_qef8k")

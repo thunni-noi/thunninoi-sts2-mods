@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsrh65y241abm"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dvhib28xcss0y" path="res://CEdefect/assets/shared/orbs/gdglow_orb/gdglow_orb.tres" id="1_62nnn"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://t30dg3mf3jcc" path="res://CEdefect/assets/default/character/ce_default.tres" id="2_g36f5"]
+[ext_resource type="Script" uid="uid://evl3y2r0mdx" path="res://CEdefect/scenes/debug.gd" id="3_g36f5"]
+
+[node name="Debug" type="Node2D"]
+script = ExtResource("3_g36f5")
+
+[node name="lightning_orb" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_62nnn")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(387.99997, 89.99999)
+scale = Vector2(0.27549195, 0.27549195)
+
+[node name="ce_default" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_g36f5")
+preview_skin = "Default"
+preview_animation = "relaxed_loop"
+preview_frame = true
+preview_time = 3.76
+position = Vector2(99, 699)

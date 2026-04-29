@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://gd5f514sa2kg"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cudjl32nycftt" path="res://CEdefect/assets/shared/orbs/logos_orb/logos_orb.atlas" id="1_kpca6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://csp24vw5jldwt" path="res://CEdefect/assets/shared/orbs/logos_orb/logos_orb.skel" id="2_d54vh"]
+
+[resource]
+atlas_res = ExtResource("1_kpca6")
+skeleton_file_res = ExtResource("2_d54vh")

@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqtjnkxwh770"]
+
+[ext_resource type="Script" uid="uid://c0mmv6dbk4ygl" path="res://CEdefectCode/Core/CE_SkinSelector.cs" id="1_1fmfy"]
+[ext_resource type="Texture2D" uid="uid://2kio7gseqmf7" path="res://CEdefect/assets/shared/flowerbed.png" id="1_q1mu0"]
+[ext_resource type="Texture2D" uid="uid://bof1wxs28jr2s" path="res://CEdefect/assets/default/character_select/civilight_bg2.png" id="2_78oju"]
+[ext_resource type="Script" uid="uid://cf2dnlv27y6id" path="res://CEdefect/scenes/default/ce_bg_controller.gd" id="3_1fmfy"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://CEdefect/assets/shared/misc/fonts/kreon_bold_shared.tres" id="5_1rsbi"]
+[ext_resource type="Texture2D" uid="uid://bcxb6y1x56akx" path="res://CEdefect/assets/shared/misc/arrow/event_button_default.png" id="5_ig0e8"]
+[ext_resource type="Texture2D" uid="uid://ipxrij7u51qq" path="res://CEdefect/assets/shared/misc/arrow/event_button_pressed.png" id="6_1cyhd"]
+[ext_resource type="Texture2D" uid="uid://cjvfg101c3m06" path="res://CEdefect/assets/shared/misc/arrow/event_button_hover.png" id="7_yfkpn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ig0e8"]
+font = ExtResource("5_1rsbi")
+font_size = 32
+outline_size = 14
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DefectBg3" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -521.0
+offset_right = 1600.0
+offset_bottom = 679.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+script = ExtResource("1_1fmfy")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(1002, 489)
+scale = Vector2(1.273, 1.273)
+texture = ExtResource("1_q1mu0")
+
+[node name="CivilightE2" type="Sprite2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(1598.0001, 1008)
+scale = Vector2(1.1980556, 1.1980556)
+texture = ExtResource("2_78oju")
+script = ExtResource("3_1fmfy")
+hover_multiplier = 0.1
+sprite = NodePath(".")
+
+[node name="SkinController" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1626.0
+offset_top = 940.0
+offset_right = 1807.0
+offset_bottom = 980.0
+mouse_filter = 1
+
+[node name="CycleButton" type="TextureButton" parent="SkinController"]
+modulate = Color(0.3632725, 0.010386099, 0.18746659, 0.6901961)
+layout_mode = 0
+offset_left = -31.999996
+offset_top = -16.999998
+offset_right = 252.0
+offset_bottom = 93.0
+scale = Vector2(0.84734297, 0.72734296)
+texture_normal = ExtResource("5_ig0e8")
+texture_pressed = ExtResource("6_1cyhd")
+texture_hover = ExtResource("7_yfkpn")
+
+[node name="SkinName" type="Label" parent="SkinController"]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 42.0
+text = "Change Skins"
+label_settings = SubResource("LabelSettings_ig0e8")

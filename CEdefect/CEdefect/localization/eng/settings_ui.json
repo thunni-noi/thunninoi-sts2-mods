@@ -1,0 +1,15 @@
+{
+  "CEDEFECT.mod_title" : "Civilight Eterna Defect",
+  "CEDEFECT-USE_CIVILIGHT_CARD_FRAME.title" : "Enable card frame",
+  "CEDEFECT-USE_CIVILIGHT_CARD_FRAME.hover.desc" : "Enable card frame recolor for Civilight Eterna",
+  "CEDEFECT-USE_CIVILIGHT_ENERGY.title": "Enable energy recolor",
+  "CEDEFECT-USE_CIVILIGHT_ORBS.title" : "Enable custom orb",
+  "CEDEFECT-USE_CIVLIGHT_ORBS.hover.desc" : "Use custom orb visuals",
+  "CEDEFECT-USE_CIVILIGHT_ENERGY.hover.desc" : "Enable recolor for energy counters",
+  "CEDEFECT-USE_CIVILIGHT_MULT_ARM.title" : "Enable multiplayer arm",
+  "CEDEFECT-USE_CIVILIGHT_MULT_ARM.hover.desc" : "Enable custom multiplayer arm (rock/paper/scissor/point) for Civilight Eterna (Defect)",
+  "CEDEFECT-USE_CE_COMPAT_MODE.title": "Enable compatibility mode",
+  "CEDEFECT-USE_CE_COMPAT_MODE.hover.desc": "Enable compatibility mode, will disable custom animation. Enable this if the mod broke",
+  "CEDEFECT-DEBUG_MODE.title": "Enable debug mode",
+  "CEDEFECT-DEBUG_MODE.desc": "Enable debug mode that will print debug in logs, usually disable to prevent log flooding"
+}

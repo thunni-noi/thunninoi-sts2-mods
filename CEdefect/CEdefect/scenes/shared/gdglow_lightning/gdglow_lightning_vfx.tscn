@@ -1,0 +1,234 @@
+[gd_scene load_steps=14 format=3 uid="uid://iwlvrbfhdn2c"]
+
+[ext_resource type="Texture2D" uid="uid://c3g5sqg3jgooi" path="res://CEdefect/assets/shared/misc/lightning_gdglow/gglow.png" id="1_o1tmi"]
+[ext_resource type="Texture2D" uid="uid://csveavqf3e3y4" path="res://CEdefect/assets/shared/misc/lightning_gdglow/vfx_lightning_00_crop.png" id="2_und5p"]
+[ext_resource type="Texture2D" uid="uid://chq2bxtqxwlsv" path="res://CEdefect/assets/shared/misc/lightning_gdglow/vfx_lightning_01b_crop.png" id="3_2068h"]
+[ext_resource type="Texture2D" uid="uid://ctpnbp1gddwoc" path="res://CEdefect/assets/shared/misc/lightning_gdglow/vfx_lightning_03_crop.png" id="4_jhh83"]
+[ext_resource type="Texture2D" uid="uid://dka4hchrl6831" path="res://CEdefect/assets/shared/misc/lightning_gdglow/vfx_lightning_04_crop.png" id="5_354mn"]
+[ext_resource type="Texture2D" uid="uid://bj3hlapsrloau" path="res://CEdefect/assets/shared/misc/lightning_gdglow/vfx_lightning_02_crop.png" id="6_htvhy"]
+[ext_resource type="Texture2D" uid="uid://sqs25wr4f85m" path="res://CEdefect/assets/shared/misc/lightning_gdglow/star_09.png" id="7_o1tmi"]
+[ext_resource type="Shader" uid="uid://f0xgi3d17o50" path="res://CEdefect/scenes/shared/gdglow_lightning/gdglow_lightning_vfx.gdshader" id="8_und5p"]
+[ext_resource type="Texture2D" uid="uid://bfudlejoobdy4" path="res://CEdefect/scenes/shared/gdglow_lightning/gdglow_lightning_gradient.tres" id="9_lve02"]
+
+[sub_resource type="Animation" id="Animation_6edhj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Drone/Light:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9254902, 0.7921569, 0.9372549, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Drone:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Drone:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(511, 384)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lightning:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_und5p")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lightning:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(514, 461.00003)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Drone/Light:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.525, 0.525)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Drone:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vrvor"]
+resource_name = "vfx_attack_lightning"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lightning:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.26666665, 0.33333334, 0.33343333, 0.4, 0.46666667, 0.5333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("2_und5p"), ExtResource("3_2068h"), ExtResource("3_2068h"), ExtResource("4_jhh83"), ExtResource("5_354mn"), ExtResource("6_htvhy")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Drone/Light:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 0.1, 0.13333334, 0.5333333, 0.6),
+"transitions": PackedFloat32Array(1, 1, 31651.693, 1, 1),
+"update": 0,
+"values": [Color(0.9254902, 0.7921569, 0.9372549, 0), Color(1, 1, 1, 1), Color(0.9254902, 0.7921569, 0.9372549, 0), Color(1, 1, 1, 1), Color(0.9254902, 0.7921569, 0.9372549, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Drone:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06666667, 0.1, 0.5333333, 0.56666666),
+"transitions": PackedFloat32Array(1389.5115, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Drone:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.16666667, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -28.45), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lightning:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3, 0.33333334),
+"transitions": PackedFloat32Array(315.1728, 1),
+"update": 0,
+"values": [Vector2(3, 77.00003), Vector2(3, 134.38)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.6333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Drone/Light:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.06666667, 0.5358917, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.5), Vector2(0.4, 0.5), Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Drone:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.5358917, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfbjl"]
+_data = {
+&"RESET": SubResource("Animation_6edhj"),
+&"vfx_attack_lightning": SubResource("Animation_vrvor")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2068h"]
+shader = ExtResource("8_und5p")
+shader_parameter/gradient = ExtResource("9_lve02")
+
+[node name="GdglowLightningVfx" type="Node2D"]
+
+[node name="Drone" type="Sprite2D" parent="."]
+position = Vector2(511, 384)
+texture = ExtResource("1_o1tmi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Drone"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_wfbjl")
+}
+autoplay = "vfx_attack_lightning"
+
+[node name="Light" type="Sprite2D" parent="Drone"]
+modulate = Color(0.9163077, 0.8154649, 0.99063176, 1)
+self_modulate = Color(0.9254902, 0.7921569, 0.9372549, 0)
+scale = Vector2(0.525, 0.525)
+texture = ExtResource("7_o1tmi")
+
+[node name="Lightning" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2068h")
+position = Vector2(514, 461.00003)
+scale = Vector2(0.18071161, 0.18071161)
+texture = ExtResource("2_und5p")

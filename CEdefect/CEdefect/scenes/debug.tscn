@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsrh65y241abm"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dvhib28xcss0y" path="res://CEdefect/assets/shared/orbs/gdglow_orb/gdglow_orb.tres" id="1_62nnn"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://t30dg3mf3jcc" path="res://CEdefect/assets/default/character/ce_default.tres" id="2_g36f5"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://biut2wiidnhpi" path="res://CEdefect/assets/shared/orbs/amiya_orb/amiya_orb.tres" id="3_5nwa2"]
+[ext_resource type="Script" uid="uid://evl3y2r0mdx" path="res://CEdefect/scenes/debug.gd" id="3_g36f5"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c5tgp016reyxl" path="res://CEdefect/assets/epoque/character/ce_epoque.tres" id="4_nvk5i"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://gd5f514sa2kg" path="res://CEdefect/assets/shared/orbs/logos_orb/logos_orb.tres" id="4_t4stf"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dvemm5djbtyge" path="res://CEdefect/assets/shared/orbs/lin_orb/lin_orb.tres" id="5_5vap7"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bl00ffkmh486k" path="res://CEdefect/assets/shared/orbs/hoshi_orb/hoshi_orb.tres" id="6_m8efw"]
+
+[node name="Debug" type="Node2D"]
+script = ExtResource("3_g36f5")
+
+[node name="lightning_orb" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_62nnn")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(387.99997, 89.99999)
+scale = Vector2(0.27549195, 0.27549195)
+
+[node name="plasma_orb" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_5nwa2")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.75
+position = Vector2(203.00002, 79)
+scale = Vector2(0.27549195, 0.27549195)
+
+[node name="dark_orb" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("4_t4stf")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.75
+position = Vector2(-154.99995, 79.00001)
+scale = Vector2(0.27549195, 0.27549195)
+
+[node name="glass_orb" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("5_5vap7")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.75
+position = Vector2(15, 91.00001)
+scale = Vector2(0.27549195, 0.27549195)
+
+[node name="frost_orb" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("6_m8efw")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.5
+position = Vector2(617, 79.00001)
+scale = Vector2(0.27549195, 0.27549195)
+
+[node name="ce_default" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_g36f5")
+preview_skin = "Default"
+preview_animation = "hurt"
+preview_frame = false
+preview_time = 3.76
+position = Vector2(99, 699)
+
+[node name="ce_epoque" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("4_nvk5i")
+preview_skin = "default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 0.7
+position = Vector2(537, 698)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://pft8eiwvuda7"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dvemm5djbtyge" path="res://CEdefect/assets/shared/orbs/lin_orb/lin_orb.tres" id="1_1hnjk"]
+[ext_resource type="Shader" uid="uid://2ow2oyydkbb1" path="res://CEdefect/scenes/shared/orbs/outline_orb.gdshader" id="1_3qjia"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_laoyo"]
+shader = ExtResource("1_3qjia")
+shader_parameter/outline_color = Color(1, 0.79607844, 0.99215686, 0.47058824)
+shader_parameter/outline_width = 4.00000019
+
+[node name="lin_orb" type="Node2D"]
+
+[node name="OrbRender" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_laoyo")
+
+[node name="OrbSprite" type="SpineSprite" parent="OrbRender"]
+skeleton_data_res = ExtResource("1_1hnjk")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.1, 0.1)

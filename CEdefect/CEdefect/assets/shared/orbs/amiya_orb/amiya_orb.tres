@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://biut2wiidnhpi"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bsl8kpwai1chn" path="res://CEdefect/assets/shared/orbs/amiya_orb/amiya_orb.atlas" id="1_pb0nk"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://7x8tvu1tbfcu" path="res://CEdefect/assets/shared/orbs/amiya_orb/amiya_orb.skel" id="2_dl38x"]
+
+[resource]
+atlas_res = ExtResource("1_pb0nk")
+skeleton_file_res = ExtResource("2_dl38x")

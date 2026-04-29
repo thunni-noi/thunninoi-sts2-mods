@@ -1,0 +1,17 @@
+{
+  "DEFECT.aromaPrinciple": "[sine][blue]1100 0011 1100 0011...[/blue][/sine]",
+  "DEFECT.banter.alive.endTurnPing": "[jitter]Doctor, I have faith in your command.[/jitter]",
+  "DEFECT.banter.dead.endTurnPing": "Keep striding forward. I shall be at your side...",
+  "DEFECT.cardsModifierDescription": "Civilight Eterna's cards will now appear in rewards and shops.",
+  "DEFECT.cardsModifierTitle": "Civilight Eterna's Cards",
+  "DEFECT.description": "An echo of the past\nLoaded with love and hope for the future.",
+  "DEFECT.eventDeathPrevention": "I must live on for my friends!",
+  "DEFECT.goldMonologue": "[sine]This gold can be exchanged for parts...[/sine]",
+  "DEFECT.possessiveAdjective": "her",
+  "DEFECT.pronounObject": "she",
+  "DEFECT.pronounPossessive": "her",
+  "DEFECT.pronounSubject": "she",
+  "DEFECT.title": "Civilight Eterna",
+  "DEFECT.titleObject": "Civilight Eterna",
+  "DEFECT.unlockText": "Play a single run with [pink]{Prerequisite}[/pink] to unlock this character."
+}
