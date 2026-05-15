@@ -1,35 +1,33 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace thunninoiSkinManager.thunninoiSkinManagerCode;
 
-public class SkinData
+public class SkinData(string targetCharacterId, string skinId, string skinName)
 {
-    public string TargetCharacterId { get; }
-    public string SkinId { get; }
-    public string SkinName { get; }
+    public string TargetCharacterId { get; } = targetCharacterId.ToUpperInvariant();
+    public string SkinId { get; } = skinId;
+    public string SkinName { get; } = skinName;
     public bool IsDefault { get; private set; } = false;
  
     internal string? CombatVisuals { get; private set; }
     internal string? MerchantAnim { get; private set; }
     internal string? RestSiteAnim { get; private set; }
     internal string? CharacterSelectBg { get; private set; }
-    internal string? CharacterSelectIcon { get; private set; }
+    internal string? CharacterSelectPortrait { get; private set; }
     internal string? CharacterSelectTransition { get; private set; }
-    internal string? TopPanelIcon { get; private set; }
-    internal string? TopPanelIconOutline { get; private set; }
+    internal string? CharacterIcon { get; private set; }
+    internal string? CharacterIconOutline { get; private set; }
     internal string? IconScene { get; private set; }
     internal string? MapMarker { get; private set; }
     internal string? CardFrameMaterial { get; private set; }
     internal string? CardTrail { get; private set; }
     internal string? EnergyIcon { get; private set; }
-    internal string? EnergyCounterScene { get; private set; }
     internal string? EnergyLayer1 { get; private set; }
     internal string? EnergyLayer2 { get; private set; }
     internal string? EnergyLayer3 { get; private set; }
-    
     internal string? EnergyLayer4 { get; private set; }
-    
     internal string? EnergyLayer5 { get; private set; }
     internal Color? EnergyOutlineColor { get; private set; }
     internal Color? EnergyLabelOutlineColor { get; private set; }
@@ -40,23 +38,39 @@ public class SkinData
     internal Color? ShivTintColor { get; private set; }
     internal string? PreviewSkeletonData { get; private set; }
     
-    
     internal Dictionary<string, OrbSkinData> OrbSkins { get; } = new();
     internal Dictionary<Type, PowerSkinData> Powers { get; } = new();
     internal Dictionary<Type, PotionSkinData> Potions { get; } = new();
     internal Dictionary<Type, RelicSkinData> Relics { get; } = new();
-
-    internal Dictionary<string, AudioData> Audio { get; } = new(StringComparer.OrdinalIgnoreCase);
+    //internal Dictionary<string, AudioData> Audio { get; } = new(StringComparer.OrdinalIgnoreCase);
  
     private readonly Dictionary<string, object> _customData = new();
- 
-    public SkinData(string targetCharacterId, string skinId, string skinName)
-    {
-        TargetCharacterId = targetCharacterId.ToUpperInvariant();
-        SkinId = skinId;
-        SkinName = skinName;
-    }
     
+    // Config Loader
+    public static class SkinConfigKey
+    {
+        public const string UseCardFrame = "UseCardFrame";
+        public const string UseEnergy = "UseEnergy";
+        public const string  UseHands = "UseHands";
+        public const string SilentRecolorShiv = "SilentRecolorShiv";
+        public const string  UseDefectOrbs = "UseDefectOrbs";
+        public const string UseRegentBlade = "UseRegentBlade";
+    }
+
+    private readonly Dictionary<string, Func<bool>> _configLoaded = new();
+
+    public SkinData RegisterConfig(string key, Func<bool> configVar)
+    {
+        _configLoaded[key] = configVar;
+        return this;
+    }
+
+    public bool IsConfigEnabled(string key, bool defaultVar = true)
+    {
+        if (_configLoaded.TryGetValue(key, out var condition)) return condition();
+        return defaultVar;
+    }  
+
     // mark default skin
     public SkinData AsDefault()
     {
@@ -77,7 +91,7 @@ public class SkinData
         string? icon = null, string? transition = null)
     {
         CharacterSelectBg = bg;
-        CharacterSelectIcon = icon;
+        CharacterSelectPortrait = icon;
         CharacterSelectTransition = transition;
         return this;
     }
@@ -85,8 +99,8 @@ public class SkinData
     public SkinData RegisterIcon(string? iconPath, string? outlinePath = null,
         string? iconScene = null, string? mapMarker = null)
     {
-        TopPanelIcon = iconPath;
-        TopPanelIconOutline = outlinePath;
+        CharacterIcon = iconPath;
+        CharacterIconOutline = outlinePath;
         IconScene = iconScene;
         MapMarker = mapMarker;
         return this;
@@ -101,8 +115,7 @@ public class SkinData
     }
  
     public SkinData RegisterEnergy(string? energyIcon = null,
-        string? layer1 = null, string? layer2 = null, string? layer3 = null, string? layer4 = null, string? layer5 = null,
-        string? counterScene = null)
+        string? layer1 = null, string? layer2 = null, string? layer3 = null, string? layer4 = null, string? layer5 = null)
     {
         EnergyIcon = energyIcon;
         EnergyLayer1 = layer1;
@@ -110,7 +123,6 @@ public class SkinData
         EnergyLayer3 = layer3;
         EnergyLayer4 = layer4;
         EnergyLayer5 = layer5;
-        EnergyCounterScene = counterScene;
         return this;
     }
  
@@ -174,14 +186,14 @@ public class SkinData
         return this;
     }
     
-    // Scrapped, as baselib currently has no stable audio support (FModAudio is deprecated)
+    /* Scrapped, as baselib currently has no stable audio support (FModAudio is deprecated)
     public SkinData RegisterSfx(string key, string sfxPath, float volume = 1.0f, float pitch = 1.0f)
     {
         //Audio[key] = new AudioData(sfxPath, volume, pitch);
         //if (key == "charIntro") Audio[$"event:/sfx/characters/{TargetCharacterId.ToLower()}/{TargetCharacterId.ToLower()}_select"] = new AudioData(sfxPath, volume, pitch);
         return this;
     }
-    
+    */
     
     public SkinData RegisterCustom(string key, object value)
     {
@@ -219,6 +231,7 @@ public class SkinData
  
     internal record RelicSkinData(string IconPath, string? OutlinePath,
         string? BigIconPath);
+    
 }
  
 public static class SkinDataExtensions

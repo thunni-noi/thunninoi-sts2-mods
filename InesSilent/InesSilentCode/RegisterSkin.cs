@@ -50,6 +50,9 @@ public class RegisterSkin
         InesSkin.RegisterPower<PoisonPower>(
             "res://InesSilent/assets/ui/icon/wisadele/wisadele_power.png", 
             "res://InesSilent/assets/ui/icon/wisadele/wisadele_power.png");
+        InesSkin.RegisterConfig(SkinData.SkinConfigKey.UseCardFrame, () => InesConfig.UseInesCardFrame);
+        InesSkin.RegisterConfig(SkinData.SkinConfigKey.UseEnergy, () => InesConfig.UseInesEnergy);
+        InesSkin.RegisterConfig(SkinData.SkinConfigKey.UseHands, () => InesConfig.UseInesMultArm);
         SkinRegistry.Register(InesSkin);
     }
 }

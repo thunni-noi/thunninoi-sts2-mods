@@ -27,7 +27,7 @@ public class CharacterSelectPatches
     {
         string charId = __instance.Id.Entry.ToLower();
         
-        string? skinPortraitPath = SkinRegistry.PathResolve(charId, skin => skin.CharacterSelectIcon);
+        string? skinPortraitPath = SkinRegistry.PathResolve(charId, skin => skin.CharacterSelectPortrait);
         if (string.IsNullOrWhiteSpace(skinPortraitPath)) return true;
         __result = skinPortraitPath;
         return false;

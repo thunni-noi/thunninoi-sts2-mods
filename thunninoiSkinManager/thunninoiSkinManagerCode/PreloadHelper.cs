@@ -44,9 +44,9 @@ public class PreloadHelper
         Add(skin.MerchantAnim);
         Add(skin.RestSiteAnim);
         Add(skin.CharacterSelectBg);
-        Add(skin.CharacterSelectIcon);
-        Add(skin.TopPanelIcon);
-        Add(skin.TopPanelIconOutline);
+        Add(skin.CharacterSelectPortrait);
+        Add(skin.CharacterIcon);
+        Add(skin.CharacterIconOutline);
         Add(skin.CardFrameMaterial);
         Add(skin.CardTrail);
         Add(skin.EnergyIcon);

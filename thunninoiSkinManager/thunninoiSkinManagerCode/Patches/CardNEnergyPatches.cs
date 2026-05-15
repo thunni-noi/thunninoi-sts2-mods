@@ -19,6 +19,7 @@ public class CardNEnergyPatches
         string charId = __instance.Title.ToLower();
         if(!SkinRegistry.GetAllCharacterIds().Contains(charId)) return true;
         //modEntry.Logger.Info($"CardPool --> {charId}");
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseCardFrame)) return true;
         string? skinPath = SkinRegistry.PathResolve(charId, skin => skin.CardFrameMaterial);
         if (string.IsNullOrEmpty(skinPath)) return true;
         __result = skinPath;
@@ -31,6 +32,7 @@ public class CardNEnergyPatches
     private static bool CardTrailPath(CharacterModel __instance, ref string __result)
     {
         string charId = __instance.Id.Entry.ToLower();
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseCardFrame)) return true;
         string? skinPath = SkinRegistry.PathResolve(charId, skin => skin.CardTrail);
         if (string.IsNullOrWhiteSpace(skinPath)) return true;
         __result = skinPath;
@@ -53,6 +55,7 @@ public class CardNEnergyPatches
     {
         Player player = PlayerField.Invoke(__instance);
         string charId = player.Character.Id.Entry.ToLower();
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseEnergy)) return;
         if (string.IsNullOrWhiteSpace(charId)) return;
         if (SkinRegistry.GetActiveSkin(charId).IsDefault) return;
         modEntry.Logger.Info("EnergyCounterReplace - Trying to set layers");
@@ -69,6 +72,7 @@ public class CardNEnergyPatches
     private static bool EnergyIconHelperReplace(string prefix, ref string __result)
     {
         string charId = prefix.ToLower();
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseEnergy)) return true;
         if (!SkinRegistry.GetAllCharacterIds().Contains(charId)) return true;
         string? skinPath = SkinRegistry.PathResolve(charId, skin => skin.EnergyIcon);
         if (string.IsNullOrWhiteSpace(skinPath)) return true;
@@ -82,6 +86,7 @@ public class CardNEnergyPatches
     private static bool CardEnergyReplace(CardPoolModel __instance, ref string __result)
     {
         string charId = __instance.Title.ToLower();
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseEnergy)) return true;
         if(!SkinRegistry.GetAllCharacterIds().Contains(charId)) return true;
         string? skinPath = SkinRegistry.PathResolve(charId, skin => skin.EnergyIcon);
         if (string.IsNullOrWhiteSpace(skinPath)) return true;
@@ -108,6 +113,7 @@ public static class EnergyLabelOutlineColorReplace
     private static bool Prefix(CharacterModel __instance, ref Color __result)
     {
         string charId = __instance.Id.Entry.ToLower();
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseEnergy)) return true;
         Color? skinColor = SkinRegistry.colResolve(charId, skin => skin.EnergyLabelOutlineColor);
         if (skinColor == null) return true;
         __result = skinColor.Value;
@@ -132,6 +138,7 @@ public static class CardLabelOutlineColorReplace
     private static bool Prefix(CardPoolModel __instance, ref Color __result)
     {
         string charId = __instance.Title.ToLower();
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseEnergy)) return true;
         if (!SkinRegistry.GetAllCharacterIds().Contains(charId)) return true;
         Color? skinColor = SkinRegistry.colResolve(charId, skin => skin.EnergyOutlineColor);
         if (skinColor == null) return true;

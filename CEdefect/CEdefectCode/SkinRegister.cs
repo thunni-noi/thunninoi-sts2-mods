@@ -115,7 +115,16 @@ public class SkinRegister
             "res://CEdefect/assets/shared/relics/theresa_amiya_outline.png",
             "res://CEdefect/assets/shared/relics/theresa_amiya_dolls.png");
 
+<<<<<<< Updated upstream
         toAdded.RegisterSfx("charIntro",Path.Combine(CE_Init.modDirectory, "CEaudio", "deploy_sfx.wav"), 0.8f);
         //toAdded.RegisterSfx("event:/sfx/characters/defect/defect_select")
+=======
+        //toAdded.RegisterSfx("charIntro",Path.Combine(CE_Init.modDirectory, "CEaudio", "deploy_sfx.wav"), 0.8f);
+        //toAdded.RegisterSfx("event:/sfx/characters/defect/defect_select")
+        toAdded.RegisterConfig(SkinData.SkinConfigKey.UseCardFrame, () => CE_Config.UseCivilightCardFrame);
+        toAdded.RegisterConfig(SkinData.SkinConfigKey.UseEnergy, () => CE_Config.UseCivilightEnergy);
+        toAdded.RegisterConfig(SkinData.SkinConfigKey.UseHands, () => CE_Config.UseCivilightEnergy);
+        toAdded.RegisterConfig(SkinData.SkinConfigKey.UseDefectOrbs, () => CE_Config.UseCivilightOrbs);
+>>>>>>> Stashed changes
     }
 }

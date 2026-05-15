@@ -80,7 +80,7 @@
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
         <AdditionalFiles Include="CEdefect/localization/**/*.json"/>
         <PackageReference Update="GodotSharp" Version="4.7.0-dev.4" />
-        <PackageReference Include="thunninoi.SkinManager" Version="0.0.5" />
+        <PackageReference Include="thunninoi.SkinManager" Version="0.0.8" />
     </ItemGroup>
 
     <ItemGroup>

@@ -17,7 +17,7 @@
         
         <PackageId>thunninoi.SkinManager</PackageId>
         <Title>thunninoi-SkinManager</Title>
-        <Version>0.0.5</Version>
+        <Version>0.0.8</Version>
         <Authors>thunninoi</Authors>
         <Description>Slay The Spire 2 Skin Manager</Description>
         <IncludeBuildOutout>true</IncludeBuildOutout>

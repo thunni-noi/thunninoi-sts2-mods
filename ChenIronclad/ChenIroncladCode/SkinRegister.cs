@@ -42,6 +42,9 @@ public class SkinRegister
             "res://ChenIronclad/assets/ui/energy/chen_orb_layer_4.png",
             "res://ChenIronclad/assets/ui/energy/chen_orb_layer_5.png"
         );
+        chenSkin.RegisterConfig(SkinData.SkinConfigKey.UseCardFrame, () => ChenConfig.UseChenCardFrame);
+        chenSkin.RegisterConfig(SkinData.SkinConfigKey.UseEnergy, () => ChenConfig.UseChenEnergy);
+        chenSkin.RegisterConfig(SkinData.SkinConfigKey.UseHands, () => ChenConfig.UseChenMultArm);
         chenSkin.RegisterEnergyColor(new Color("#0000AA"), new Color("#0000AA"));
         SkinRegistry.Register(chenSkin);
 

@@ -191,8 +191,9 @@ public class SkinRegistry
     }
     
     // ────── Utilities ──────
-    public static SkinData GetActiveSkin(string characterId)
+    public static SkinData? GetActiveSkin(string characterId)
     {
+        if (!_skins.ContainsKey(characterId)) return null;
         int index = _activePointer[characterId];
         return _skins[characterId][index];
     }
@@ -287,6 +288,7 @@ public class SkinRegistry
         return loadedTexture;
     }
 
+    /*
     internal static SkinData.AudioData? sfxResolve(string characterId, string audioKey)
     {
         if (GetActiveSkin(characterId).Audio.TryGetValue(audioKey, out SkinData.AudioData? sfxPath))
@@ -300,11 +302,12 @@ public class SkinRegistry
         };
         return null;
     } 
+    */
 
-    internal static SkinData.PowerSkinData? powerResolve(PowerModel powerObj) =>
+    internal static SkinData.PowerSkinData? PowerResolve(PowerModel powerObj) =>
         _activePowers.TryGetValue(powerObj.GetType(), out var data) ? data : null;
 
-    internal static SkinData.PotionSkinData? potionResolve(PotionModel potionObj)
+    internal static SkinData.PotionSkinData? PotionResolve(PotionModel potionObj)
     {
         modEntry.Logger.Info("Resolve has been called for " + potionObj.GetType().Name);
         foreach (SkinData.PotionSkinData potion in _activePotions.Values)
@@ -314,7 +317,7 @@ public class SkinRegistry
         return _activePotions.TryGetValue(potionObj.GetType(), out var data) ? data : null;
     }
 
-    internal static SkinData.RelicSkinData? relicResolve(RelicModel relicObj)
+    internal static SkinData.RelicSkinData? RelicResolve(RelicModel relicObj)
     {
         modEntry.Logger.Info("Resolve has been called for " + relicObj.GetType().Name);
         foreach (SkinData.RelicSkinData relic in _activeRelics.Values)
@@ -324,13 +327,20 @@ public class SkinRegistry
         return _activeRelics.TryGetValue(relicObj.GetType(), out var data) ? data : null;
     }
 
-    internal static SkinData.OrbSkinData? orbResolve(string orbId)
+    internal static SkinData.OrbSkinData? OrbResolve(string orbId)
     {
         SkinData? defectSkin = GetActiveSkin("defect");
         if (defectSkin.IsDefault) return null;
         if (defectSkin.OrbSkins.TryGetValue(orbId, out var orbSkin)) return orbSkin;
         return null;
-    } 
+    }
+
+    internal static bool resolveConfig(string charId, string key)
+    {
+        SkinData? activeSkin = GetActiveSkin(charId);
+        if (activeSkin == null || activeSkin.IsDefault) return true;
+        return activeSkin.IsConfigEnabled(key);
+    }
     
     internal static T? Resolve<T>(string characterId, string key) where T : class
     {

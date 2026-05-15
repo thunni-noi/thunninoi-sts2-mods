@@ -54,6 +54,7 @@ public class CharacterVisualPatches
     private static bool ArmReplace(CharacterModel __instance, Func<SkinData, string?> selector, ref string __result)
     {
         string charId = __instance.Id.Entry.ToLower();
+        if (!SkinRegistry.resolveConfig(charId, SkinData.SkinConfigKey.UseHands)) return true;
         string armPath = SkinRegistry.PathResolve(charId, selector);
         if (string.IsNullOrWhiteSpace(armPath)) return true;
         __result = armPath;

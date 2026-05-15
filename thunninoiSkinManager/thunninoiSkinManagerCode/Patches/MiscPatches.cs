@@ -31,10 +31,11 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool OrbReplace(OrbModel __instance, ref Node2D __result)
     {
+        if (!SkinRegistry.resolveConfig("defect", SkinData.SkinConfigKey.UseDefectOrbs)) return true;
         string orbId = __instance.Id.Entry.ToLower();
         //modEntry.Logger.Info($"Orb {orbId} recreated");
         if (string.IsNullOrWhiteSpace(orbId)) return true;
-        SkinData.OrbSkinData? orbData = SkinRegistry.orbResolve(orbId);
+        SkinData.OrbSkinData? orbData = SkinRegistry.OrbResolve(orbId);
         if (orbData == null) return true;
         modEntry.Logger.Info($"Found {orbData.OrbScenePath} for orb {orbId}!");
         string? orbScenePath = orbData?.OrbScenePath;
@@ -58,8 +59,9 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool OrbIconReplace(OrbModel __instance, ref string __result)
     {
+        if (!SkinRegistry.resolveConfig("defect", SkinData.SkinConfigKey.UseDefectOrbs)) return true;
         string orbId = __instance.Id.Entry.ToLower();
-        SkinData.OrbSkinData? orbData = SkinRegistry.orbResolve(orbId);
+        SkinData.OrbSkinData? orbData = SkinRegistry.OrbResolve(orbId);
         string orbIconPath = orbData?.OrbIconPath;
         if (string.IsNullOrWhiteSpace(orbIconPath)) return true;
         if (!ResourceLoader.Exists(orbIconPath))
@@ -88,7 +90,7 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool PowerIconReplace(PowerModel __instance, ref Texture2D __result)
     {
-        SkinData.PowerSkinData? powerSkin = SkinRegistry.powerResolve(__instance);
+        SkinData.PowerSkinData? powerSkin = SkinRegistry.PowerResolve(__instance);
         if (powerSkin == null) return true;
         Texture2D? powerIconTexture = LoadTexture(powerSkin.PowerIcon);
         if (powerIconTexture == null) return true;
@@ -101,7 +103,7 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool PowerBigIconReplace(PowerModel __instance, ref Texture2D __result)
     {
-        SkinData.PowerSkinData? powerSkin = SkinRegistry.powerResolve(__instance);
+        SkinData.PowerSkinData? powerSkin = SkinRegistry.PowerResolve(__instance);
         if (powerSkin == null) return true;
         Texture2D? powerBigIconTexture = LoadTexture(powerSkin.PowerBigIcon);
         if (powerBigIconTexture == null) return true;
@@ -115,7 +117,7 @@ public class MiscPatches
     private static void PotionReplace(NPotion __instance)
     {
         if (!__instance.IsNodeReady()) return;
-        SkinData.PotionSkinData? potionSkin = SkinRegistry.potionResolve(__instance.Model);
+        SkinData.PotionSkinData? potionSkin = SkinRegistry.PotionResolve(__instance.Model);
         if (potionSkin == null) return;
         modEntry.Logger.Info("Potion Reload " + potionSkin.SpritePath);
         if (!__instance.IsNodeReady()) return;
@@ -132,7 +134,7 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool PotionThrowReplace(PotionModel __instance, ref Texture2D? __result)
     {
-        SkinData.PotionSkinData? potionSkin = SkinRegistry.potionResolve(__instance);
+        SkinData.PotionSkinData? potionSkin = SkinRegistry.PotionResolve(__instance);
         if (potionSkin == null) return true;
         Texture2D? sprite = LoadTexture(potionSkin.SpritePath);
         if (sprite == null) return true;
@@ -146,7 +148,7 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool RelicIconReplace(RelicModel __instance, ref Texture2D? __result)
     {
-        SkinData.RelicSkinData? relicSkin = SkinRegistry.relicResolve(__instance);
+        SkinData.RelicSkinData? relicSkin = SkinRegistry.RelicResolve(__instance);
         if (relicSkin == null) return true;
         Texture2D? sprite = LoadTexture(relicSkin.IconPath);
         if (sprite == null) return true;
@@ -159,7 +161,7 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool RelicBigIconReplace(RelicModel __instance, ref string __result)
     {
-        SkinData.RelicSkinData? relicSkin = SkinRegistry.relicResolve(__instance);
+        SkinData.RelicSkinData? relicSkin = SkinRegistry.RelicResolve(__instance);
         if (relicSkin == null) return true;
         string? iconPath = relicSkin.BigIconPath;
         if (string.IsNullOrWhiteSpace(iconPath)) return true;
@@ -178,7 +180,7 @@ public class MiscPatches
     [HarmonyPriority(Priority.High)]
     private static bool RelicOutlineReplace(RelicModel __instance, ref Texture2D? __result)
     {
-        SkinData.RelicSkinData? relicSkin = SkinRegistry.relicResolve(__instance);
+        SkinData.RelicSkinData? relicSkin = SkinRegistry.RelicResolve(__instance);
         if (relicSkin == null) return true;
         Texture2D? sprite = LoadTexture(relicSkin.OutlinePath);
         if (sprite == null) return true;
@@ -200,7 +202,7 @@ public class MiscPatches
             return;
         }
         modEntry.Logger.Info(model.IconPath);
-        SkinData.RelicSkinData? relicSkin = SkinRegistry.relicResolve(model);
+        SkinData.RelicSkinData? relicSkin = SkinRegistry.RelicResolve(model);
         if (relicSkin == null) return;
         modEntry.Logger.Info(model.IconPath);
         Texture2D? sprite = LoadTexture(relicSkin.IconPath);
@@ -225,8 +227,9 @@ public static class OrbDarkenedRecolor
     [HarmonyPriority(Priority.High)]
     private static bool Prefix(OrbModel __instance, ref Color __result)
     {
+        if (!SkinRegistry.resolveConfig("defect", SkinData.SkinConfigKey.UseDefectOrbs)) return true;
         string orbId = __instance.Id.Entry.ToLower();
-        Color? orbColor = SkinRegistry.orbResolve(orbId).OrbDarkenedColor;
+        Color? orbColor = SkinRegistry.OrbResolve(orbId).OrbDarkenedColor;
         if (orbColor == null) return true;
         __result = orbColor.Value;
         return false;

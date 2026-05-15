@@ -14,7 +14,7 @@ public class CharacterIconPatches
     private static bool charIconReplace(CharacterModel __instance, ref Texture2D __result)
     {
         string charId = __instance.Id.Entry.ToLower();
-        Texture2D? skinIcon = SkinRegistry.textureResolve(charId, skin => skin.TopPanelIcon);
+        Texture2D? skinIcon = SkinRegistry.textureResolve(charId, skin => skin.CharacterIcon);
         if (skinIcon == null) return true;
         __result = skinIcon;
         return false;
@@ -26,7 +26,7 @@ public class CharacterIconPatches
     private static bool charOutlineIconReplace(CharacterModel __instance, ref Texture2D __result)
     {
         string charId = __instance.Id.Entry.ToLower();
-        Texture2D? skinOutline = SkinRegistry.textureResolve(charId, skin => skin.TopPanelIconOutline);
+        Texture2D? skinOutline = SkinRegistry.textureResolve(charId, skin => skin.CharacterIconOutline);
         if (skinOutline == null) return true;
         __result = skinOutline;
         return false;
