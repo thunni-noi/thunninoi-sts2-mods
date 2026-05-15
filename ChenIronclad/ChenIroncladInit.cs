@@ -5,6 +5,7 @@ using Godot;
 using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
+using thunninoiSkinManager.thunninoiSkinManagerCode;
 
 namespace ChenIronclad;
 
