@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform float h: hint_range(0,1) = 1;
 uniform float s: hint_range(0,5) = 1;
-uniform float v = 1;
+uniform float v: hint_range(0,5) = 1;
 
 // A varying to pass the modulate value to the fragment function
 varying vec4 modulate_color;

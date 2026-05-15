@@ -5,6 +5,8 @@ using Godot.Bridge;
 using HarmonyLib;
 using InesSilent.InesSilentCode;
 using MegaCrit.Sts2.Core.Modding;
+using MegaCrit.Sts2.Core.Models.Potions;
+using thunninoiSkinManager.thunninoiSkinManagerCode;
 
 namespace InesSilent;
 
