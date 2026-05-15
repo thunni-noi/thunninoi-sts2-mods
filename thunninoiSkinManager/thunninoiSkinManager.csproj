@@ -1,4 +1,4 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.5.1" InitialTargets="CheckDependencyPaths">
+<Project Sdk="Godot.NET.Sdk/4.5.1" InitialTargets="CheckDependencyPaths">
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>true</ImplicitUsings>
@@ -8,6 +8,21 @@
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
         <PathMap>$(AppOutputBase)=.\</PathMap>
     </PropertyGroup>
+    
+    <!-- Nuget Package Data -->
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <OutputPath>publish</OutputPath>
+        
+        <PackageId>thunninoi.SkinManager</PackageId>
+        <Title>thunninoi-SkinManager</Title>
+        <Version>0.0.5</Version>
+        <Authors>thunninoi</Authors>
+        <Description>Slay The Spire 2 Skin Manager</Description>
+        <IncludeBuildOutout>true</IncludeBuildOutout>
+    </PropertyGroup>
+    
 
     <!-- OS Detection -->
     <PropertyGroup>
@@ -26,7 +41,7 @@
         <AutoSteamPath>$(registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)\steamapps</AutoSteamPath>
         <SteamLibraryPath Condition="Exists('$(AutoSteamPath)/common/Slay the Spire 2')">$(AutoSteamPath)</SteamLibraryPath>
 
-        <GodotPath Condition="'$(GodotPath)' == ''">D:/hobby-projects/sts2_mod/megadot/MegaDot_v4.5.1-stable_mono_win64.exe</GodotPath>
+        <GodotPath>D:/hobby-projects/sts2_mod/megadot/MegaDot_v4.5.1-stable_mono_win64.exe</GodotPath>
         <!-- If on Windows and Slay the Spire 2 is not installed in your default steam library, adjust the following.-->
         <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">D:/SteamLibrary/steamapps</SteamLibraryPath>
 
@@ -72,23 +87,22 @@
         <Reference Include="sts2">
             <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
             <Private>false</Private>
+            <Publicize>False</Publicize> <!--Allows private/protected field references but may cause errors.-->
         </Reference>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.3" PrivateAssets="All" />
-        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
-        <AdditionalFiles Include="CEdefect/localization/**/*.json"/>
-        <PackageReference Update="GodotSharp" Version="4.7.0-dev.4" />
-        <PackageReference Include="thunninoi.SkinManager" Version="0.0.5" />
+        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
+        <AdditionalFiles Include="thunninoiSkinManager/localization/**/*.json"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="CEdefect/**"/>
+        <Compile Remove="thunninoiSkinManager/**"/>
         <Compile Remove="materials/**"/>
         <Compile Remove="shaders/**"/>
         <Compile Remove="images/**"/>
-        <EmbeddedResource Remove="CEdefect/**"/>
+        <EmbeddedResource Remove="thunninoiSkinManager/**"/>
         <EmbeddedResource Remove="materials/**"/>
         <EmbeddedResource Remove="shaders/**"/>
         <EmbeddedResource Remove="images/**"/>
@@ -96,16 +110,20 @@
 
     <ItemGroup>
         <None Include=".gitignore"/>
-        <None Include="CEdefect.json"/>
+        <None Include="thunninoiSkinManager.json"/>
         <None Include="project.godot"/>
-        <None Include="CEdefect/**"/>
+        <None Include="thunninoiSkinManager/**"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="CEaudio\" />
-      <Folder Include="CEdefect\assets\shared\" />
-      <Folder Include="CEdefect\scenes\character\" />
-      <Folder Include="CEdefect\scenes\epoche\" />
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.5.0-beta.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="thunninoiSkinManagerCode\Preloader\" />
     </ItemGroup>
 
     <Target Name="CheckDependencyPaths">
@@ -120,17 +138,12 @@
     <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
         <Message Text="Copying .dll and manifest to mods folder." Importance="high"/>
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
-        <Copy SourceFiles="CEdefect.json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
+        <Copy SourceFiles="thunninoiSkinManager.json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
         <Message Text="Copying BaseLib to mods folder." Importance="high"/>
         <ItemGroup>
             <BaseLibFiles Include="$(NuGetPackageRoot)/alchyr.sts2.baselib/**/lib/**/BaseLib.dll;$(NuGetPackageRoot)/alchyr.sts2.baselib/**/Content/BaseLib.pck;$(NuGetPackageRoot)/alchyr.sts2.baselib/**/Content/BaseLib.json;"/>
         </ItemGroup>
         <Copy SourceFiles="@(BaseLibFiles)" DestinationFolder="$(ModsPath)BaseLib/"/>
-        <Message Text="Copying audio folder to mods folder." Importance="high"/>
-        <ItemGroup>
-            <CEaudioFiles Include="$(MSBuildProjectDirectory)/CEaudio/**/*.*" />
-        </ItemGroup>
-        <Copy SourceFiles="@(CEaudioFiles)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/CEaudio/%(RecursiveDir)" SkipUnchangedFiles="true" />
     </Target>
 
     <Target Name="GodotPublish" AfterTargets="Publish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">

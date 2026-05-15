@@ -1,4 +1,3 @@
-using CEdefect.CEdefectCode.SkinManager;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Logging;
@@ -29,7 +28,7 @@ public partial class CE_SkinSelector : Control
    private void CycleSkin()
    {
 	   //GD.Print("[ce] CycleSkin()");
-	   SkinRegistry.CycleSkin();
+	   //SkinRegistryLegacy.CycleSkin();
 	   SfxCmd.Play("event:/sfx/ui/clicks/ui_click");
 	   RefreshCharacterSelectBg();
 	   
@@ -41,7 +40,7 @@ public partial class CE_SkinSelector : Control
 	  Node? parent = GetParent();
 	  if (parent == null) return;
 
-	  PackedScene? scene = SkinRegistry.ResolveScene(s => s.CharacterSelectBg);
+	  PackedScene? scene = null;
 	  if (scene == null)
 	  {
 		 Log.Error("CharacterSelectBg is null");

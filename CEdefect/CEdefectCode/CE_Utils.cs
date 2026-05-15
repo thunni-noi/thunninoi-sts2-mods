@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Models;
+using thunninoiSkinManager.thunninoiSkinManagerCode;
 
 namespace CEdefect.CEdefectCode;
 
@@ -10,6 +11,9 @@ public class CE_Utils
         if (!CE_Config.DebugMode) return;
         CE_Init.Logger.Info(msg);
     }
+
+    public static bool isUsingSkin() => (!SkinRegistry.IsUsingSkin("defect", "ceterna") ||
+                                         !SkinRegistry.IsUsingSkin("defect", "ceterna2"));
     
     public static bool IsDefect(CharacterModel instance)
     {

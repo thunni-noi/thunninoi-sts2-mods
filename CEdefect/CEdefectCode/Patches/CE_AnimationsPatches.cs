@@ -16,49 +16,6 @@ namespace CEdefect.CEdefectCode.Patches;
 [HarmonyPatch]
 public static class CE_AnimationsPatches
 {
-    [HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.GenerateAnimator))]
-    [HarmonyPrefix]
-    [HarmonyPriority(Priority.High)]
-    public static bool EntryAnimationAdded(CharacterModel __instance, MegaSprite controller, ref CreatureAnimator __result)
-    {
-        if (CE_Config.UseCeCompatMode) return true;
-        if (__instance.GetType() != typeof(Defect))
-            return true;
-
-        if (!controller.HasAnimation("entry")) return true;
-
-        AnimState idleLoop = new AnimState("idle_loop", isLooping: true);
-        AnimState entryState = new AnimState("entry") { NextState = idleLoop }; // Added enter animation
-
-        AnimState cast = new AnimState("cast")    { NextState = idleLoop };
-        AnimState attack = new AnimState("attack")  { NextState = idleLoop };
-        AnimState hurt = new AnimState("hurt")    { NextState = idleLoop };
-        AnimState die = new AnimState("die");
-        AnimState relaxed = new AnimState("relaxed_loop", isLooping: true);
-        
-        AnimState castEnd = new AnimState("cast_end") { NextState = idleLoop };
-        AnimState castLoop = new AnimState("cast_loop", isLooping:true);
-        AnimState castStart = new AnimState("cast_start") { NextState = castLoop };
-
-        relaxed.AddBranch("Idle", idleLoop);
-
-        CreatureAnimator animator = new CreatureAnimator(entryState, controller); // Start as enter animation
-
-        animator.AddAnyState("Idle",    idleLoop);
-        animator.AddAnyState("Dead",    die);
-        animator.AddAnyState("Hit",     hurt);
-        animator.AddAnyState("Attack",  attack);
-        animator.AddAnyState("Cast",    cast);
-        animator.AddAnyState("Relaxed", relaxed);
-        
-        animator.AddAnyState("CastStart",castStart);
-        animator.AddAnyState("CastLoop",castLoop);
-        animator.AddAnyState("CastEnd",castEnd);
-
-        __result = animator;
-        return false;
-    }
-    
     // (Note for my future me)
     // Below is a garbled up code that is the result of many many many duct tape put together to achieve very minor things people would not noticed
     // If this break (which is very likely), either just don't bother to fix it or spent unreasonable amount of time to fix it, your call.
@@ -90,6 +47,7 @@ public static class CE_AnimationsPatches
     [HarmonyPriority(Priority.High)]
     private static bool SuppressGameAnim(Creature creature, string triggerName, ref Task __result)
     {
+        if (!CE_Utils.isUsingSkin()) return true;
         if (CE_Config.UseCeCompatMode) return true;
         if (!string.Equals(triggerName, "Cast", StringComparison.Ordinal)) return true;
         //if (!string.Equals(triggerName, "Attack", StringComparison.Ordinal)) return true;
@@ -105,6 +63,7 @@ public static class CE_AnimationsPatches
     private static bool VoltaicPatch(Voltaic __instance, PlayerChoiceContext choiceContext,
         CardPlay cardPlay, ref Task __result)
     {
+        if (!CE_Utils.isUsingSkin()) return true;
         if (CE_Config.UseCeCompatMode) return true;
         if (__instance.Owner.Character is not Defect) return true;
         // prevent infinite recursion
@@ -137,6 +96,7 @@ public static class CE_AnimationsPatches
     private static bool MulticastPatch(MultiCast __instance, PlayerChoiceContext choiceContext,
         CardPlay cardPlay, ref Task __result)
     {
+        if (!CE_Utils.isUsingSkin()) return true;
         if (CE_Config.UseCeCompatMode) return true;
         if (__instance.Owner.Character is not Defect) return true;
         if (_skipReentry.Contains(__instance)) return true;
@@ -169,6 +129,7 @@ public static class CE_AnimationsPatches
     private static bool TempestPatch(MultiCast __instance, PlayerChoiceContext choiceContext,
         CardPlay cardPlay, ref Task __result)
     {
+        if (!CE_Utils.isUsingSkin()) return true;
         if (CE_Config.UseCeCompatMode) return true;
         if (__instance.Owner.Character is not Defect) return true;
         if (_skipReentry.Contains(__instance)) return true;
