@@ -1,0 +1,7 @@
+[h1]thunninoi's Skin Loader[/h1]
+Loader and Manager for my skins, 
+Additional skins can be loaded in via built-in methods, Take a look in my github if you're interested!
+
+Should be compatible with any other mods that replace default game assets and not redirect assets path.
+
+[url=https://github.com/thunni-noi/thunninoi-sts2-mods]Source code for all my mods are available here![/url]

@@ -2,23 +2,9 @@
 Ines from Arknights as The Silent
  > "You always win, just like the old days. But this time, your joy is real."
 
- ## Dependencies
- This mod required [Baselib](https://github.com/Alchyr/BaseLib-StS2) version [3.0.6](https://github.com/Alchyr/BaseLib-StS2/releases) or later
 
  ## Installation
- Put entire mods inside mods folder, do the same with baseLib. It should look like this
- ```
-Slay The Spire 2
-└── mods
-    ├── InesSilent
-    │   ├── InesSilent.dll
-    │   ├── InesSilent.json
-    │   └── InesSilent.pck
-    └── baselib
-        ├── BaseLib.dll
-        ├── BaseLib.json
-        └── BaseLib.pck
-
+Please install through [Steam Workshop](https://steamcommunity.com/id/thunninoi-yours-truly/myworkshopfiles?appid=2868840)
  ```
 
  ## Compatibilites

@@ -1,5 +1,6 @@
 # thunninoi's Slay The Spire 2 mods
 My collection of Slay The Spire 2 mods
+### All mods i made are on [Steam Workshop](https://steamcommunity.com/id/thunninoi-yours-truly/myworkshopfiles?appid=2868840)!
 
 ## Mod Lists
 [Chen Ironclad](ChenIronclad/ChenIronclad.md)           |  [Ines Silent](InesSilent/InesSilent.md)  | 
