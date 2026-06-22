@@ -16,7 +16,7 @@ namespace thunninoiSkinManager.thunninoiSkinManagerCode;
 [GlobalClass]
 public partial class SkinSelector : Control
 {
-    public string characterId { get; set; }
+    public ModelId characterId { get; set; }
     public CharacterModel characterModel { get; set; }
     
     private Node2D? _previewSpriteContainer;
@@ -32,75 +32,80 @@ public partial class SkinSelector : Control
         _prevButton = GetNodeOrNull<NGoldArrowButton>("HBoxContainer/PrevArrow");
         _nextButton = GetNodeOrNull<NGoldArrowButton>("HBoxContainer/NextArrow");
         
-        _prevButton.Connect(Button.SignalName.Pressed, Callable.From(onPrevPressed));
-        _nextButton.Connect(Button.SignalName.Pressed, Callable.From(onNextPressed));
+        _prevButton.Connect(Button.SignalName.Pressed, Callable.From(OnPrevPressed));
+        _nextButton.Connect(Button.SignalName.Pressed, Callable.From(OnNextPressed));
         if (characterModel != null)
         {
-            loadPreview();
+            LoadPreview();
         }
     }
     
-    private void loadPreview()
+    private void LoadPreview()
     {
         _skinNameLable.Text = SkinRegistry.GetActiveSkin(characterId).SkinName;
         // remove old if existed
         Node? existed = GetNodeOrNull("VisualContainer/PreviewSprite");
         existed?.Free();
-        
-        Node2D characterVisuals = characterModel.CreateVisuals().GetNode<Node2D>("Visuals");
+
+        Node2D baseVisual = characterModel.CreateVisuals();
+        Node2D characterVisuals = baseVisual.GetNode<Node2D>("Visuals");
         characterVisuals.Name = "PreviewSprite";
         characterVisuals.Scale = characterVisuals.GetScale() * 0.85f;
         _previewSpriteContainer.AddChild(characterVisuals.Duplicate());
         //GetNode<Node2D>("VisualContainer/PreviewSprite").SetPosition(new Vector2(0,0));
         //MegaSprite megaSprite = new MegaSprite(previewVisuals);
-        CallDeferred("playPreviewAnim");
+        PlayPreviewSprite();
     }
 
-    private void playPreviewAnim()
+    private void PlayPreviewSprite()
     {
-        
+        Node animNode = GetNode<Node>("VisualContainer/PreviewSprite");
         MegaSprite megaSprite = new MegaSprite(GetNode("VisualContainer/PreviewSprite"));
         var animState = megaSprite.GetAnimationState();
         if (megaSprite.HasAnimation("entry"))
         {
-            animState.SetAnimation("entry", false, 0);
-            animState.AddAnimation("idle_loop", 0f, true, 0);
+            modEntry.Logger.Info("Play entry anim");
+            animState.SetAnimation("entry", loop:false);
+            animState.AddAnimation("idle_loop", loop: true);
         }
         else
         {
-            animState.SetAnimation("idle_loop", true, 0);
+            animState.AddAnimation("idle_loop", loop: true);   
         }
+        
+
     }
 
-    private void onPrevPressed()
+    private void OnPrevPressed()
     {
         SkinRegistry.CyclePrevious(characterId);
-        refresh();
+        Refresh();
     }
     
-    private void onNextPressed()
+    private void OnNextPressed()
     {
         modEntry.Logger.Info("OnNextPressed");
         SkinRegistry.CycleNext(characterId);
-        refresh();
+        Refresh();
     }
 
-    public void refresh()
+    public void Refresh()
     {
-        refreshBg();
-        refreshButton();
-        multiplayerIconRefresh();
-        loadPreview();
+        RefreshBg();
+        RefreshButton();
+        MultiplayerIconRefresh();
+        LoadPreview();
         //playIntroSfx();
     }
 
-    private void refreshBg()
+    private void RefreshBg()
     { 
         var parent = GetParent();
         modEntry.Logger.Info(parent.Name);
         Node? bgContainer = parent.GetNode("AnimatedBg");
 
-        Node? curBg = bgContainer.GetNode(characterId.ToUpper() + "_bg");
+        Node? curBg = bgContainer.GetNode(characterId.Entry.ToUpper() + "_bg");
+        if (curBg == null) return;
         string bgName = curBg.Name;
 
         string skinBgPath = characterModel.CharacterSelectBg;
@@ -115,17 +120,17 @@ public partial class SkinSelector : Control
         bgContainer.AddChildSafely(skinBg);
     }
 
-    private void refreshButton()
+    private void RefreshButton()
     {
         Node? mainScreen = GetParent();
-        NCharacterSelectButton? targetButton = mainScreen.GetNodeOrNull<NCharacterSelectButton>("CharSelectButtons/ButtonContainer/" + characterId.ToUpper() + "_button");
+        NCharacterSelectButton? targetButton = mainScreen.GetNodeOrNull<NCharacterSelectButton>("CharSelectButtons/ButtonContainer/" + characterId.Entry.ToUpper() + "_button");
         if (targetButton == null) return;
         TextureRect? charPortrait = targetButton.GetNodeOrNull<TextureRect>("%Icon");
         if (charPortrait == null) return;
         charPortrait.Texture = characterModel.CharacterSelectIcon;
     }
 
-    private void multiplayerIconRefresh()
+    private void MultiplayerIconRefresh()
     {
         //FieldInfo? charId = typeof(NRemoteLobbyPlayer).GetField("_character", BindingFlags.NonPublic | BindingFlags.Instance);
         MethodInfo? refreshMultiplayer = typeof(NRemoteLobbyPlayer).GetMethod("RefreshVisuals", BindingFlags.NonPublic | BindingFlags.Instance);

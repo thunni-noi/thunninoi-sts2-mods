@@ -16,6 +16,20 @@ public partial class modEntry : Node
     public static MegaCrit.Sts2.Core.Logging.Logger Logger { get; } =
         new(ModId, MegaCrit.Sts2.Core.Logging.LogType.Generic);
     
+    public static void PrintChildren(Node currentNode, int depth = 0)
+    {
+        if (currentNode == null) return;
+        
+        string prefix = depth == 0 ? "" : " " + new string('-', depth) + " ";
+        string text = $"{prefix}{currentNode.Name}";
+        Logger.Info(text);
+
+        foreach (Node child in currentNode.GetChildren())
+        {
+            PrintChildren(child, depth + 1);
+        }
+    }
+    
     public static string? ModDirectory = Path.GetDirectoryName(typeof(modEntry).Assembly.Location);
 
     public static void Initialize()
@@ -25,6 +39,5 @@ public partial class modEntry : Node
 
         ScriptManagerBridge.LookupScriptsInAssembly(executingAssembly);
         harmony.PatchAll(executingAssembly);
-        //SkinRegistry.SkinDbSetup();
     }
 }
