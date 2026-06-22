@@ -1,5 +1,6 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Characters;
 using thunninoiSkinManager.thunninoiSkinManagerCode;
 
 namespace CEdefect.CEdefectCode;
@@ -12,18 +13,9 @@ public class CE_Utils
         CE_Init.Logger.Info(msg);
     }
 
-    public static bool isUsingSkin() => (!SkinRegistry.IsUsingSkin("defect", "ceterna") ||
-                                         !SkinRegistry.IsUsingSkin("defect", "ceterna2"));
+    public static bool IsUsingSkin() => (SkinRegistry.IsUsingSkin(ModelDb.Character<Defect>().Id, "ceterna") ||
+                                         SkinRegistry.IsUsingSkin(ModelDb.Character<Defect>().Id, "ceterna2"));
     
-    public static bool IsDefect(CharacterModel instance)
-    {
-        ModelId modelId = ((AbstractModel)instance).Id;
-        String modelEntry = modelId.Entry;
-        Logger($"IsDefect: {modelEntry}");
-        if (string.IsNullOrWhiteSpace(modelEntry)) return false;
-        if (!string.Equals(modelEntry, "defect", StringComparison.OrdinalIgnoreCase)) return false;
-        return true;
-    }
 
     public static bool ResourceAvailable(string resourcePath)
     {
@@ -34,4 +26,5 @@ public class CE_Utils
         }
         return true;
     }
+    
 }

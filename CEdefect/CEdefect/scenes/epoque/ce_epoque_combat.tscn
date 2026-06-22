@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://befc44mu3pqlg"]
+[gd_scene load_steps=4 format=3 uid="uid://befc44mu3pqlg"]
 
 [ext_resource type="Script" uid="uid://caw7di5ajy6f2" path="res://CEdefectCode/Core/CE_CreatureVisuals.cs" id="1_d44qg"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://c5tgp016reyxl" path="res://CEdefect/assets/epoque/character/ce_epoque.tres" id="2_eojva"]
+[ext_resource type="Script" uid="uid://mv70rbji8exa" path="res://CEdefect/scenes/default/spine_limit.gd" id="3_f4h5v"]
 
 [node name="Defect" type="Node2D"]
 script = ExtResource("1_d44qg")
@@ -17,6 +18,7 @@ preview_time = 0.0
 unique_name_in_owner = true
 position = Vector2(1, -7)
 scale = Vector2(0.65, 0.65)
+script = ExtResource("3_f4h5v")
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

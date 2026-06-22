@@ -70,8 +70,8 @@ public class CE_OrbPatches
     [HarmonyPriority(Priority.High)]
     private static bool LightningVfxPatch(Creature target, ref string path)
     {
-        if (!CE_Utils.isUsingSkin()) return true;
-        if (CE_Config.UseCeCompatMode) return true;
+        if (!CE_Utils.IsUsingSkin()) return true;
+        //if (CE_Config.UseCeCompatMode) return true;
         if (!CE_Config.UseCivilightOrbs) return true;
         if (!target.IsEnemy) return true;
         //Log.Info("[CE] Is enemy" + target.);

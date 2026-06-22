@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var civilight_l2d : SpineSprite
-@export var clickbox : Area2D
 
 @export var idle_animation = "Idle"
 @export var click_animation = "Interact"

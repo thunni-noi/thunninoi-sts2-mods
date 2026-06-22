@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://da60d2xr5fx3j"]
+[gd_scene load_steps=4 format=3 uid="uid://da60d2xr5fx3j"]
 
 [ext_resource type="Script" uid="uid://caw7di5ajy6f2" path="res://CEdefectCode/Core/CE_CreatureVisuals.cs" id="1_6gh4f"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://t30dg3mf3jcc" path="res://CEdefect/assets/default/character/ce_default.tres" id="2_6cwn0"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://t30dg3mf3jcc" path="res://CEdefect/assets/default/character/ce_default.tres" id="2_q6hgt"]
+[ext_resource type="Script" uid="uid://mv70rbji8exa" path="res://CEdefect/scenes/default/spine_limit.gd" id="3_adk0u"]
 
 [node name="Defect" type="Node2D"]
 script = ExtResource("1_6gh4f")
@@ -9,14 +10,15 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Visuals" type="SpineSprite" parent="."]
-skeleton_data_res = ExtResource("2_6cwn0")
+skeleton_data_res = ExtResource("2_q6hgt")
 preview_skin = "Default"
-preview_animation = "attack"
+preview_animation = "idle_loop"
 preview_frame = false
 preview_time = 0.0
 unique_name_in_owner = true
 position = Vector2(1, -7)
 scale = Vector2(0.7, 0.7)
+script = ExtResource("3_adk0u")
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

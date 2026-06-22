@@ -2,12 +2,12 @@
   "id": "CEdefect",
   "name": "Civilight Eterna as The Defect",
   "author": "thunninoi",
-  "description": "T̶h̶e̶r̶e̶s̶a̶ Civilight Eterna from Arknights as The Defect",
-  "version": "v1.0.0",
+  "description": "Civilight Eterna from Arknights as The Defect",
+  "version": "v1.1.0",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [
-    {"id": "BaseLib", "min_version": "3.1.3"},
+    {"id": "BaseLib", "min_version": "3.3.1"},
     {"id": "thunninoiSkinManager", "min_version": "1.0.0"}
   ],
   "affects_gameplay": false,

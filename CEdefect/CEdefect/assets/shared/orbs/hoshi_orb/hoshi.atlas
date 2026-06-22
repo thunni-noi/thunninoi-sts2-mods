@@ -1,0 +1,19 @@
+hoshi.png
+size: 850,1206
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frame_0
+  rotate: false
+  xy: 2, 2
+  size: 600, 600
+  orig: 600, 600
+  offset: 0, 0
+  index: -1
+frame_1
+  rotate: false
+  xy: 2, 604
+  size: 600, 600
+  orig: 600, 600
+  offset: 0, 0
+  index: -1
