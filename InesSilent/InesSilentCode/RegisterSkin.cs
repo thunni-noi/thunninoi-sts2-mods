@@ -9,10 +9,9 @@ using thunninoiSkinManager.thunninoiSkinManagerCode.Patches;
 
 namespace InesSilent.InesSilentCode;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(SkinRegistry), nameof(SkinRegistry.SkinDbSetup))]
 public class RegisterSkin
 {
-    [HarmonyPatch(typeof(SkinRegistry), nameof(SkinRegistry.SkinDbSetup))]
     [HarmonyPostfix]
     public static void RegisterInesSkin()
     {

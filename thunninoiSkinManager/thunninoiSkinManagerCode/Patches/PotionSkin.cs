@@ -20,14 +20,13 @@ public abstract class PotionSkin<T> : PotionSkin where T : PotionModel
     public override ModelId TargetPotionId => ModelDb.GetId<T>();
 }
 
-[HarmonyPatch]
-class PotionPatch
+[HarmonyPatch(typeof(NPotion), "Reload")]
+public static class PotionModelSkin
 {
     private static readonly FieldInfo PotionModel = AccessTools.Field(typeof(NPotion), "_model");
     
-    [HarmonyPatch(typeof(NPotion), "Reload")]
     [HarmonyPostfix]
-    public static void PotionReload(NPotion __instance)
+    public static void Postfix(NPotion __instance)
     {
         if (PotionModel.GetValue(__instance) is not PotionModel model) return;
         if (!__instance.IsNodeReady()) return;
@@ -36,13 +35,15 @@ class PotionPatch
         
         if (skinData.CustomSpritePath != null) __instance.Image.Texture = PreloadManager.Cache.GetTexture2D(skinData.CustomSpritePath);
         if (skinData.CustomSpriteOutlinePath != null) __instance.Outline.Texture = PreloadManager.Cache.GetTexture2D(skinData.CustomSpriteOutlinePath);
-        
     }
+}
 
-    [HarmonyPatch(typeof(PotionModel), "get_Image")]
+[HarmonyPatch(typeof(PotionModel), "get_Image")]
+public static class PotionThrown
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    public static bool PotionThrownImage(PotionModel __instance, ref Texture2D? __result)
+    public static bool Prefix(PotionModel __instance, ref Texture2D? __result)
     {
         PotionSkin? skinData = SkinRegistry.ResolvePotion(__instance.Id);
         if (skinData is PotionSkin)
@@ -53,6 +54,7 @@ class PotionPatch
                 return false;
             }
         }
+
         return true;
     }
 }

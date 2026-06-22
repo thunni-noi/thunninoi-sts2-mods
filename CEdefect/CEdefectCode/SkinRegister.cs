@@ -8,10 +8,9 @@ using thunninoiSkinManager.thunninoiSkinManagerCode;
 
 namespace CEdefect.CEdefectCode.Patches;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(SkinRegistry), nameof(SkinRegistry.SkinDbSetup))]
 public class SkinRegister
 {
-    [HarmonyPatch(typeof(SkinRegistry), nameof(SkinRegistry.SkinDbSetup))]
     [HarmonyPostfix]
     private static void RegisterSkin()
     {

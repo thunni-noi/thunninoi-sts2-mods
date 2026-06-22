@@ -7,10 +7,9 @@ using thunninoiSkinManager.thunninoiSkinManagerCode.Patches;
 
 namespace ChenIronclad.ChenIroncladCode;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(SkinRegistry), nameof(SkinRegistry.SkinDbSetup))]
 public class SkinRegister
 {   
-    [HarmonyPatch(typeof(SkinRegistry), nameof(SkinRegistry.SkinDbSetup))]
     [HarmonyPostfix]
     private static void RegisterSkin()
     {
@@ -23,8 +22,9 @@ public class SkinRegister
         SkinRegistry.Register(chenSkin);
 
     }
-    
-    public class Chen_Skin : CharacterSkin<Ironclad>
+}
+
+public class Chen_Skin : CharacterSkin<Ironclad>
 {
     public override string CombatVisual => "res://ChenIronclad/scenes/character/chen_dawnstreak.tscn";
     public override string MerchantVisual => "res://ChenIronclad/scenes/character/chen_dawnstreak_merchant.tscn";
@@ -60,5 +60,4 @@ public class SkinRegister
     public override string? HandRock => "res://ChenIronclad/assets/ui/arm/chen_rock.png";
     public override string? HandPaper => "res://ChenIronclad/assets/ui/arm/chen_paper.png";
     public override string? HandScissors => "res://ChenIronclad/assets/ui/arm/chen_scissor.png";
-}
 }

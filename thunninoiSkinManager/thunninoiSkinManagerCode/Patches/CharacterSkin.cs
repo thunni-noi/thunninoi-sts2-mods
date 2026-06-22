@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.RestSite;
+using thunninoiSkinManager.thunninoiSkinManagerCode.Core;
 
 namespace thunninoiSkinManager.thunninoiSkinManagerCode.Patches;
 
@@ -49,13 +50,12 @@ public partial class CharacterSkin<T> : CharacterSkin where T : CharacterModel
     public override ModelId TargetCharId => ModelDb.GetId<T>();
 }
 
-[HarmonyPatch]
-public class CharacterSkinPatches
+[HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.CreateVisuals))]
+public static class CombatVisuals
 {
-    [HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.CreateVisuals))]
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool combatVisualsReplace(CharacterModel __instance, ref NCreatureVisuals __result)
+    private static bool Prefix(CharacterModel __instance, ref NCreatureVisuals __result)
     {
         ModelId charId = __instance.Id;
         string? skinVisualPath = SkinRegistry.ResolvePath(charId, skin => skin.CharacterSkinData?.CombatVisual);
@@ -65,11 +65,14 @@ public class CharacterSkinPatches
         __result = visuals;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_RestSiteAnimPath")]
+[HarmonyPatch(typeof(CharacterModel), "get_RestSiteAnimPath")]
+public static class RestVisuals
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool restVisualReplace(CharacterModel __instance, ref string __result)
+    private static bool Prefix(CharacterModel __instance, ref string __result)
     {
         ModelId charId = __instance.Id;
         string? skinPath = SkinRegistry.ResolvePath(charId, skin => skin.CharacterSkinData?.RestVisual);
@@ -77,11 +80,14 @@ public class CharacterSkinPatches
         __result = skinPath;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_MerchantAnimPath")]
+[HarmonyPatch(typeof(CharacterModel), "get_MerchantAnimPath")]
+public static class MerchantVisuals
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool merchanVisualReplace(CharacterModel __instance, ref string __result)
+    private static bool Prefix(CharacterModel __instance, ref string __result)
     {
         ModelId charId = __instance.Id;
         string? skinPath = SkinRegistry.ResolvePath(charId, skin => skin.CharacterSkinData?.MerchantVisual);
@@ -91,52 +97,48 @@ public class CharacterSkinPatches
     }
 }
 
-[HarmonyPatch]
-public class CharacterArmPatches
+[HarmonyPatch(typeof(CharacterModel), "get_ArmPointingTexturePath")]
+public static class ArmPoint
 {
-    private static bool ArmReplace(CharacterModel __instance, Func<SkinData, string?> selector, ref string __result)
-    {
-        ModelId charId = __instance.Id;
-        if (!SkinRegistry.ResolveConfig(charId, SkinData.SkinConfigKey.UseHands)) return true;
-        string? armPath = SkinRegistry.ResolvePath(charId, selector);
-        if (string.IsNullOrWhiteSpace(armPath)) return true;
-        __result = armPath;
-        return false;
-    }
-
-    [HarmonyPatch(typeof(CharacterModel), "get_ArmPointingTexturePath")]
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool ArmPointReplace(CharacterModel __instance, ref string __result) =>
-        ArmReplace(__instance, s => s.CharacterSkinData?.HandPoint, ref __result);
-    
-    [HarmonyPatch(typeof(CharacterModel), "get_ArmRockTexturePath")]
-    [HarmonyPrefix]
-    [HarmonyPriority(Priority.High)]
-    private static bool ArmRockReplace(CharacterModel __instance, ref string __result) =>
-        ArmReplace(__instance, s => s.CharacterSkinData?.HandRock, ref __result);
-    
-    [HarmonyPatch(typeof(CharacterModel), "get_ArmPaperTexturePath")]
-    [HarmonyPrefix]
-    [HarmonyPriority(Priority.High)]
-    private static bool ArmPaperReplace(CharacterModel __instance, ref string __result) =>
-        ArmReplace(__instance, s => s.CharacterSkinData?.HandPaper, ref __result);
-    
-    [HarmonyPatch(typeof(CharacterModel), "get_ArmScissorsTexturePath")]
-    [HarmonyPrefix]
-    [HarmonyPriority(Priority.High)]
-    private static bool ArmScissorsReplace(CharacterModel __instance, ref string __result) =>
-        ArmReplace(__instance, s => s.CharacterSkinData?.HandScissors, ref __result);
+    private static bool Prefix(CharacterModel __instance, ref string __result) =>
+        modUtils.ArmReplace(__instance, s => s.CharacterSkinData?.HandPoint, ref __result);
 }
 
-[HarmonyPatch]
-public class CharacterSelectPatches
+[HarmonyPatch(typeof(CharacterModel), "get_ArmRockTexturePath")]
+public static class ArmRock
 {
-
-    [HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectBg")]
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool CharacterSelectReplace(CharacterModel __instance, ref string __result)
+    private static bool Prefix(CharacterModel __instance, ref string __result) =>
+        modUtils.ArmReplace(__instance, s => s.CharacterSkinData?.HandRock, ref __result);
+}
+
+[HarmonyPatch(typeof(CharacterModel), "get_ArmPaperTexturePath")]
+public static class ArmPaper
+{
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.High)]
+    private static bool Prefix(CharacterModel __instance, ref string __result) =>
+        modUtils.ArmReplace(__instance, s => s.CharacterSkinData?.HandPaper, ref __result);
+}
+
+[HarmonyPatch(typeof(CharacterModel), "get_ArmScissorsTexturePath")]
+public static class ArmScissor
+{
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.High)]
+    private static bool Prefix(CharacterModel __instance, ref string __result) =>
+        modUtils.ArmReplace(__instance, s => s.CharacterSkinData?.HandScissors, ref __result);
+}
+
+[HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectBg")]
+public static class CharacterSelectBg
+{
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.High)]
+    private static bool Prefix(CharacterModel __instance, ref string __result)
     {
         ModelId charId = __instance.Id;
         string? skinBgPath = SkinRegistry.ResolvePath(charId, s => s.CharacterSkinData?.CharacterSelectBg);
@@ -144,11 +146,14 @@ public class CharacterSelectPatches
         __result = skinBgPath;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectIconPath")]
+[HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectIconPath")]
+public static class CharacterSelectIcon
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool CharacterSelectPortraitReplace(CharacterModel __instance, ref string __result)
+    private static bool Prefix(CharacterModel __instance, ref string __result)
     {
         ModelId charId = __instance.Id;
         string? skinPortraitPath = SkinRegistry.ResolvePath(charId, s => s.CharacterSkinData?.CharacterSelectPortrait);
@@ -156,27 +161,30 @@ public class CharacterSelectPatches
         __result = skinPortraitPath;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectTransitionPath")]
+[HarmonyPatch(typeof(CharacterModel), "get_CharacterSelectTransitionPath")]
+public static class CharacterSelectTransition
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     private static bool CharacterSelectTransitionReplace(CharacterModel __instance, ref string __result)
     {
         ModelId charId = __instance.Id;
-        string? skinPath = SkinRegistry.ResolvePath(charId, skin => SkinRegistry.ResolvePath(charId, s => s.CharacterSkinData?.CharacterSelectTransition));
+        string? skinPath = SkinRegistry.ResolvePath(charId,
+            skin => SkinRegistry.ResolvePath(charId, s => s.CharacterSkinData?.CharacterSelectTransition));
         if (string.IsNullOrWhiteSpace(skinPath)) return true;
         __result = skinPath;
         return false;
     }
 }
 
-[HarmonyPatch]
-public class CharacterIconPatches
+[HarmonyPatch(typeof(CharacterModel), "get_IconTexture")]
+public static class CharacterIcon
 {
-    [HarmonyPatch(typeof(CharacterModel), "get_IconTexture")]
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool charIconReplace(CharacterModel __instance, ref Texture2D __result)
+    private static bool Prefix(CharacterModel __instance, ref Texture2D __result)
     {
         ModelId charId = __instance.Id;
         Texture2D? skinIcon = SkinRegistry.ResolveTexture(charId, skin => skin.CharacterSkinData?.CharacterIcon);
@@ -184,23 +192,30 @@ public class CharacterIconPatches
         __result = skinIcon;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_IconOutlineTexture")]
+[HarmonyPatch(typeof(CharacterModel), "get_IconOutlineTexture")]
+public static class CharacterIconOutline
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool charOutlineIconReplace(CharacterModel __instance, ref Texture2D __result)
+    private static bool Prefix(CharacterModel __instance, ref Texture2D __result)
     {
         ModelId charId = __instance.Id;
-        Texture2D? skinOutline = SkinRegistry.ResolveTexture(charId, skin => skin.CharacterSkinData?.CharacterIconOutline);
+        Texture2D? skinOutline =
+            SkinRegistry.ResolveTexture(charId, skin => skin.CharacterSkinData?.CharacterIconOutline);
         if (skinOutline == null) return true;
         __result = skinOutline;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_IconPath")]
+[HarmonyPatch(typeof(CharacterModel), "get_IconPath")]
+public static class IconScenePath
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool charIconSceneReplace(CharacterModel __instance, ref string __result)
+    private static bool Prefix(CharacterModel __instance, ref string __result)
     {
         ModelId charId = __instance.Id;
         string? skinPath = SkinRegistry.ResolvePath(charId, skin => skin.CharacterSkinData?.CharacterIconScene);
@@ -208,11 +223,14 @@ public class CharacterIconPatches
         __result = skinPath;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_MapMarkerPath")]
+[HarmonyPatch(typeof(CharacterModel), "get_MapMarkerPath")]
+public static class MapMarker
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool mapMarkerReplace(CharacterModel __instance, ref string __result)
+    private static bool Prefix(CharacterModel __instance, ref string __result)
     {
         ModelId charId = __instance.Id;
         string? skinPath = SkinRegistry.ResolvePath(charId, skin => skin.CharacterSkinData?.CharacterMapMarker);
@@ -222,13 +240,12 @@ public class CharacterIconPatches
     }
 }
 
-[HarmonyPatch]
-public class CardNEnergyPatches
+[HarmonyPatch(typeof(CardPoolModel), "get_FrameMaterialPath")]
+public static class CardFrameMaterial
 {
-    [HarmonyPatch(typeof(CardPoolModel), "get_FrameMaterialPath")]
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool CardFrameReplace(CardPoolModel __instance, ref string __result)
+    private static bool Prefix(CardPoolModel __instance, ref string __result)
     {
         string charName = __instance.Title.ToUpper();
         ModelId charId = new ModelId("CHARACTER", charName);
@@ -239,8 +256,11 @@ public class CardNEnergyPatches
         __result = skinPath;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CharacterModel), "get_TrailPath")]
+[HarmonyPatch(typeof(CharacterModel), "get_TrailPath")]
+public static class CardTrail
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     private static bool CardTrailPath(CharacterModel __instance, ref string __result)
@@ -252,18 +272,12 @@ public class CardNEnergyPatches
         __result = skinPath;
         return false;
     }
+}
 
-    private static void SetEnergyLayer(NEnergyCounter counter, string nodePath, Texture2D? newTexture)
-    {
-        if (newTexture == null) return;
-        TextureRect? textureNode = counter.GetNodeOrNull<TextureRect>(nodePath);
-        if (textureNode == null) return;
-        textureNode.Texture = newTexture;
-    }
-    
+[HarmonyPatch(typeof(NEnergyCounter), "_Ready")]
+public static class EnergyCounter
+{
     private static readonly AccessTools.FieldRef<NEnergyCounter, Player> PlayerField = AccessTools.FieldRefAccess<NEnergyCounter, Player>("_player");
-
-    [HarmonyPatch(typeof(NEnergyCounter), "_Ready")]
     [HarmonyPostfix]
     private static void EnergyCounterReplace(NEnergyCounter __instance)
     {
@@ -278,8 +292,19 @@ public class CardNEnergyPatches
         SetEnergyLayer(__instance, "Layers/Layer4", SkinRegistry.ResolveTexture(charId, skin => skin.CharacterSkinData?.EnergyLayers?[3]));
         SetEnergyLayer(__instance, "Layers/Layer5", SkinRegistry.ResolveTexture(charId, skin => skin.CharacterSkinData?.EnergyLayers?[4]));
     }
+    
+    private static void SetEnergyLayer(NEnergyCounter counter, string nodePath, Texture2D? newTexture)
+    {
+        if (newTexture == null) return;
+        TextureRect? textureNode = counter.GetNodeOrNull<TextureRect>(nodePath);
+        if (textureNode == null) return;
+        textureNode.Texture = newTexture;
+    }
+}
 
-    [HarmonyPatch(typeof(EnergyIconHelper), "GetPath", new[] { typeof(string) })]
+[HarmonyPatch(typeof(EnergyIconHelper), "GetPath", new[] { typeof(string) })]
+public static class EnergyIcon
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     private static bool EnergyIconHelperReplace(string prefix, ref string __result)
@@ -293,8 +318,11 @@ public class CardNEnergyPatches
         __result = skinPath;
         return false;
     }
+}
 
-    [HarmonyPatch(typeof(CardPoolModel), "get_EnergyIconPath")]
+[HarmonyPatch(typeof(CardPoolModel), "get_EnergyIconPath")]
+public static class EnergyIconCard
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     private static bool CardEnergyReplace(CardPoolModel __instance, ref string __result)
@@ -309,6 +337,7 @@ public class CardNEnergyPatches
         return false;
     }
 }
+
 
 // Dynamically apply energy patches to every character's cardpool and energy
 [HarmonyPatch]

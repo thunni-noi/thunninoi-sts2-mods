@@ -11,14 +11,13 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace thunninoiSkinManager.thunninoiSkinManagerCode.Patches;
 
-[HarmonyPatch]
-public class MiscSkin
+[HarmonyPatch(typeof(NShivThrowVfx), "ApplyTint")]
+public class SilentShivColor
 {
     // Silent's shiv color
-    [HarmonyPatch(typeof(NShivThrowVfx), "ApplyTint")]
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static bool ShivTintRecolor(ref Color tint)
+    private static bool Prefix(ref Color tint)
     {
         if (SkinRegistry.ResolveConfig(ModelDb.Character<Silent>().Id, SkinData.SkinConfigKey.SilentRecolorShiv))
         {   

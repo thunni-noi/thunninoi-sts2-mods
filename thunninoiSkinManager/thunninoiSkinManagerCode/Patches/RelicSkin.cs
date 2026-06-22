@@ -25,7 +25,7 @@ class RelicIconSkin
 {
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    public static bool PackedIconSkin(RelicModel __instance, ref string? __result)
+    public static bool Prefix(RelicModel __instance, ref string? __result)
     {
         RelicSkin? skinData = SkinRegistry.ResolveRelic(__instance.Id);
         if (skinData?.PackedIconPath is string iconPath)
@@ -42,7 +42,7 @@ class RelicIconOutlineSkin
 {
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    public static bool PackedIconOutlineSkin(RelicModel __instance, ref string? __result)
+    public static bool Prefix(RelicModel __instance, ref string? __result)
     {
         RelicSkin? skinData = SkinRegistry.ResolveRelic(__instance.Id);
         if (skinData?.PackedIconOutlinePath is string outlinePath)
@@ -60,7 +60,7 @@ class RelicBigIconSkin
 {
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    public static bool BigIconSkin(RelicModel __instance, ref string? __result)
+    public static bool Prefix(RelicModel __instance, ref string? __result)
     {
         RelicSkin? skinData = SkinRegistry.ResolveRelic(__instance.Id);
         if (skinData?.BigIconPath is string bigIconPath)
@@ -79,7 +79,7 @@ class BigIconTexture
     private static readonly FieldInfo RelicModel = AccessTools.Field(typeof(NRelic), "_model");
     
     [HarmonyPostfix]
-    public static void BigIconSkin(NRelic __instance)
+    public static void Postfix(NRelic __instance)
     {
         if (!__instance.IsNodeReady()) return;
         if (RelicModel.GetValue(__instance) is not RelicModel model) return;

@@ -10,14 +10,13 @@ using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
 namespace thunninoiSkinManager.thunninoiSkinManagerCode;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(NCharacterSelectScreen), "SelectCharacter")]
 public class SkinSelectorInjector
 {
     private const String scenePath = "res://thunninoiSkinManager/SkinSelector.tscn";
-
-    [HarmonyPatch(typeof(NCharacterSelectScreen), "SelectCharacter")]
+    
     [HarmonyPostfix]
-    private static void SelectCharacterPostfix(NCharacterSelectScreen __instance, CharacterModel characterModel)
+    private static void Postfix(NCharacterSelectScreen __instance, CharacterModel characterModel)
     {
         Node? existedSkinSelector = __instance.GetNodeOrNull("SkinSelector");
         __instance.RemoveChildSafely(existedSkinSelector);

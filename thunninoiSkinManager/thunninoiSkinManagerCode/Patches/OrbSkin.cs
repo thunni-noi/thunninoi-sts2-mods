@@ -3,6 +3,7 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Characters;
+using thunninoiSkinManager.thunninoiSkinManagerCode.Core;
 
 namespace thunninoiSkinManager.thunninoiSkinManagerCode.Patches;
 
@@ -21,20 +22,14 @@ public abstract class OrbSkin<T> : OrbSkin where T : OrbModel
     public override ModelId TargetOrbId => ModelDb.GetId<T>();
 }
 
-[HarmonyPatch]
-class OrbSkinPatches
+[HarmonyPatch(typeof(OrbModel), "IconPath", MethodType.Getter)]
+public static class OrbIcon
 {
-    internal static bool IsOrbEnabled()
-    {
-        return SkinRegistry.ResolveConfig(ModelDb.Character<Defect>().Id, SkinData.SkinConfigKey.UseDefectOrbs);
-    }
-    
-    [HarmonyPatch(typeof(OrbModel), "IconPath", MethodType.Getter)]
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    static bool IconPrefix(OrbModel __instance, ref string __result)
+    static bool Prefix(OrbModel __instance, ref string __result)
     {
-        if (!IsOrbEnabled()) return true;
+        if (!modUtils.IsOrbEnabled()) return true;
         ModelId orbId = __instance.Id;
         OrbSkin? curOrbSkin = SkinRegistry.ResolveOrb(orbId);
         if (curOrbSkin?.CustomIconPath is string orbIconPath)
@@ -42,15 +37,19 @@ class OrbSkinPatches
             __result = orbIconPath;
             return false;
         }
+
         return true;
     }
-    
-    [HarmonyPatch(typeof(OrbModel), "SpritePath", MethodType.Getter)]
+}
+
+[HarmonyPatch(typeof(OrbModel), "SpritePath", MethodType.Getter)]
+public static class OrbSpritePath
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    static bool SpritePrefix(OrbModel __instance, ref string __result)
+    static bool Prefix(OrbModel __instance, ref string __result)
     {
-        if (!IsOrbEnabled()) return true;
+        if (!modUtils.IsOrbEnabled()) return true;
         ModelId orbId = __instance.Id;
         OrbSkin? curOrbSkin = SkinRegistry.ResolveOrb(orbId);
         if (curOrbSkin?.CustomSpritePath is string path)
@@ -58,15 +57,19 @@ class OrbSkinPatches
             __result = path;
             return false;
         }
+
         return true;
     }
-    
-    [HarmonyPatch(typeof(OrbModel), nameof(OrbModel.CreateSprite))]
+}
+
+[HarmonyPatch(typeof(OrbModel), nameof(OrbModel.CreateSprite))]
+public static class CustomOrbSprite
+{
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    static bool CreateSpritePrefix(OrbModel __instance, ref Node2D __result)
+    static bool Prefix(OrbModel __instance, ref Node2D __result)
     {
-        if (!IsOrbEnabled()) return true;
+        if (!modUtils.IsOrbEnabled()) return true;
         ModelId orbId = __instance.Id;
         OrbSkin? curOrbSkin = SkinRegistry.ResolveOrb(orbId);
         if (curOrbSkin?.CreateCustomSprite() is Node2D customSprite)
@@ -74,6 +77,7 @@ class OrbSkinPatches
             __result = customSprite;
             return false;
         }
+
         return true;
     }
 }
@@ -81,7 +85,7 @@ class OrbSkinPatches
 [HarmonyPatch]
 class OrbDarkenedColorSkin
 {
-    static IEnumerable<MethodBase> TargetMethods()
+    static IEnumerable<MethodBase>? TargetMethods()
     {
         var methods = AccessTools.AllTypes()
             .Where(t => !t.IsAbstract && typeof(OrbModel).IsAssignableFrom(t))
@@ -89,6 +93,7 @@ class OrbDarkenedColorSkin
             .Where(m => m != null)
             .Cast<MethodBase>()
             .ToList();
+        if (methods.Count <= 0) return null;
         return methods;
     }
 
@@ -96,7 +101,7 @@ class OrbDarkenedColorSkin
     [HarmonyPriority(Priority.High)]
     static bool Prefix(OrbModel __instance, ref Color __result)
     {
-        if (!OrbSkinPatches.IsOrbEnabled()) return true;
+        if (!modUtils.IsOrbEnabled()) return true;
         ModelId orbId = __instance.Id;
         OrbSkin? curOrbSkin = SkinRegistry.ResolveOrb(orbId);
         if (curOrbSkin?.CustomDarkenedColor is Color col)

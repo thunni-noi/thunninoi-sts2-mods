@@ -13,7 +13,6 @@ using FileAccess = Godot.FileAccess;
 
 namespace thunninoiSkinManager.thunninoiSkinManagerCode;
 
-[HarmonyPatch]
 public class SkinRegistry
 {
     private const string savePath = "user://thunni_skin_info.json";
@@ -99,9 +98,7 @@ public class SkinRegistry
         }
     }
     
-    [HarmonyPatch(typeof(SkinRegistry), nameof(SkinRegistry.SkinDbSetup))]
-    [HarmonyFinalizer]
-    private static void finializeSetup()
+    public static void finializeSetup()
     {
         modEntry.Logger.Info("Finalizing mod db");
         foreach (ModelId charId in _activeSkins.Keys)
