@@ -3,7 +3,7 @@
 [ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://thunninoiSkinManager/Fonts/kreon_bold_shared.tres" id="1_lhr42"]
 [ext_resource type="Script" uid="uid://vgoobcdwk3ow" path="res://thunninoiSkinManagerCode/SkinSelector.cs" id="1_lp41t"]
 [ext_resource type="Texture2D" uid="uid://dvnwsxq885qm2" path="res://thunninoiSkinManager/Selector/fuzzy_nine_patch_char_select.png" id="2_kwvx4"]
-[ext_resource type="Script" uid="uid://bdq4t8u1rju1d" path="res://scrollText.gd" id="2_lp41t"]
+[ext_resource type="Script" uid="uid://bdq4t8u1rju1d" path="res://thunninoiSkinManagerCode/Core/scrollText.gd" id="2_lp41t"]
 [ext_resource type="Texture2D" uid="uid://b00p5m2xfbbs2" path="res://thunninoiSkinManager/Selector/settings_tiny_right_arrow.png" id="3_j1yey"]
 [ext_resource type="Script" uid="uid://dhvtsvrekdh37" path="res://thunninoiSkinManagerCode/Core/ArrowButton.cs" id="4_kwvx4"]
 [ext_resource type="Texture2D" uid="uid://cfvm23xk5khsh" path="res://thunninoiSkinManager/Selector/settings_tiny_left_arrow.png" id="5_14wch"]
