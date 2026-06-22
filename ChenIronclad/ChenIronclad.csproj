@@ -76,10 +76,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.0.6" PrivateAssets="All" />
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.3.1" PrivateAssets="All" />
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
         <AdditionalFiles Include="ChenIronclad/localization/**/*.json"/>
-        <PackageReference Include="thunninoi.SkinManager" Version="0.0.7" />
+        <PackageReference Include="thunninoi.SkinManager" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
