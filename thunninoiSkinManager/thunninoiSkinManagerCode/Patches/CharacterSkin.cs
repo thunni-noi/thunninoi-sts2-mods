@@ -392,6 +392,28 @@ public static class CardLabelOutlineColorReplace
     }
 }
 
+[HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.GenerateAnimator))]
+public static class EntryAnimationAdd
+{
+    [HarmonyPostfix]
+    public static void AddEntry(MegaSprite controller, CharacterModel __instance, ref CreatureAnimator __result)
+    {
+        if (!controller.HasAnimation("entry")) return;
+        FieldInfo? currentState = typeof(CreatureAnimator).GetField("_currentState", BindingFlags.NonPublic | BindingFlags.Instance);
+        AnimState? currentIdle = currentState.GetValue(__result) as AnimState;
+        if (currentIdle == null) return;
+        AnimState entryState = new AnimState("entry") { NextState = currentIdle };
+        __result.AddAnyState("Entry", entryState);
+        currentState.SetValue(__result, entryState);
+
+        var animationState = controller.GetAnimationState();
+        animationState.SetAnimation("entry", false, 0);
+        animationState.AddAnimation(currentIdle.Id, 0f, true, 0);
+    }
+}
+
+/*
+
 [HarmonyPatch]
 public static class EntryAnimationAdd
 {
@@ -426,3 +448,5 @@ public static class EntryAnimationAdd
         animationState.AddAnimation(existedIdle.Id, 0f, true, 0);
     }
 }
+
+*/

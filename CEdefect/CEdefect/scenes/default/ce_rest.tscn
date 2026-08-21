@@ -14,9 +14,10 @@ script = ExtResource("1_83lsc")
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("2_rk5wk")
 preview_skin = "Default"
-preview_animation = "overgrowth_loop"
+preview_animation = "glory_loop"
 preview_frame = false
 preview_time = 0.0
+unique_name_in_owner = true
 position = Vector2(-9.210453, 84.20986)
 scale = Vector2(1.675, 1.675)
 
@@ -141,6 +142,7 @@ show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ut4f4")
 
 [node name="ControlRoot" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 30.186
