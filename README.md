@@ -7,9 +7,9 @@ My collection of Slay The Spire 2 mods
 :-------------------------:|:-------------------------:
 ![](ChenIronclad/ChenIronclad/mod_image.png)  |  ![](InesSilent/InesSilent/mod_image.png)
 
-[Civilight Eterna Defect](CEdefect/CEdefect.md)           |  [placeholder](CEdefect/CEdefect.md)  | 
+[Civilight Eterna Defect](CEdefect/CEdefect.md)           |  [Makoto Necrobinder](https://steamcommunity.com/sharedfiles/filedetails/?id=3815275905)  | 
 :-------------------------:|:-------------------------:
-![](CEdefect/CEdefect/mod_image.png)  |  ![](CEdefect/CEdefect/mod_image.png) 
+![](CEdefect/CEdefect/mod_image.png)  |  ![](MakotoNecrobinder\MakotoNecrobinder\mod_image.png) 
 ## Disclaimer
 Most of the assets are property of **Hypergryph** and are taken from **Arknights**. I do not claim any rights to any of assets used in this repository. This project is strictly fan-made and non-commercial.
 
