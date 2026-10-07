@@ -1,0 +1,13 @@
+{
+  "MAKOTONECROBINDER.mod_title": "Makoto Necrobinder",
+  "MAKOTONECROBINDER-EVOKER_SFX_VOLUME.title": "Cast SFX Volume",
+  "MAKOTONECROBINDER-EVOKER_SFX_VOLUME.hover.desc": "Adjust volume played on cast animation (Set to 0 to mute)",
+  "MAKOTONECROBINDER-USE_MAKOTO_CARD_FRAME.title": "Enable card frame recolor",
+  "MAKOTONECROBINDER-USE_MAKOTO_CARD_FRAME.hover.desc": "Enable card frame recolor while using skin",
+  "MAKOTONECROBINDER-USE_MAKOTO_ENERGY.title": "Enable energy counter recolor",
+  "MAKOTONECROBINDER-USE_MAKOTO_ENERFY.hover.desc": "Enable energy counter recolor while using skin",
+  "MAKOTONECROBINDER-USE_MAKOTO_ARMS.title": "Enable multiplacer arms",
+  "MAKOTONECROBINDER-USE_MAKOTO_ARMS.hover.desc": "Replace multiplayer arms while using skin",
+  "MAKOTONECROBINDER-USE_MAKOTO_TRANSITION.title": "Enable character transition",
+  "MAKOTONECROBINDER-USE_MAKOTO_TRANSITION.hover.desc": "Enable transition when using skin"
+}

@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://bssv3yaw1l65i"]
+
+[ext_resource type="Script" uid="uid://ckq4iqwipyqgd" path="res://MakotoNecrobinderCode/Core/Mkt_RestSiteCharacter.cs" id="1_yftmj"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cxfdg4b8x5sv6" path="res://MakotoNecrobinder/assets/sees/character_visuals/sprites/makoto_rest.tres" id="2_ljqth"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://MakotoNecrobinder/assets/selection_reticle/selection_reticle.tscn" id="3_kpj85"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ysxny"]
+
+[node name="MakotoRestSite" type="Node2D"]
+position = Vector2(-2, 42)
+scale = Vector2(0.760006, 0.760006)
+script = ExtResource("1_yftmj")
+
+[node name="Makoto" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_ljqth")
+multiply_material = SubResource("CanvasItemMaterial_ysxny")
+preview_skin = "Default"
+preview_animation = "overgrowth_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(6.5789, -10.5262)
+scale = Vector2(1.715, 1.715)
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SelectionReticle" parent="ControlRoot" instance=ExtResource("3_kpj85")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -205.0
+offset_top = -453.0
+offset_right = 242.0
+offset_bottom = 284.0
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -191.0
+offset_top = -446.0
+offset_right = 237.0
+offset_bottom = 280.0
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 127.631
+offset_top = -356.576
+offset_right = 127.631
+offset_bottom = -356.576
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -172.367
+offset_top = -342.103
+offset_right = -172.367
+offset_bottom = -342.103

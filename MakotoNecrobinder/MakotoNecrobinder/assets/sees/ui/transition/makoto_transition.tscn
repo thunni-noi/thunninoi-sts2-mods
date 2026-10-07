@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bedatvid11bwd"]
+
+[ext_resource type="Shader" uid="uid://ddxdegr4i31b8" path="res://MakotoNecrobinder/assets/sees/ui/transition/makoto_transition.gdshader" id="1_fw0xc"]
+[ext_resource type="VideoStream" uid="uid://dclay0scpoua1" path="res://MakotoNecrobinder/assets/sees/ui/transition/p3r_transition.ogv" id="1_jqrec"]
+[ext_resource type="Script" uid="uid://hxslob1fx3rm" path="res://MakotoNecrobinder/assets/sees/ui/transition/video_stream_player.gd" id="3_1l4x3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1l4x3"]
+shader = ExtResource("1_fw0xc")
+shader_parameter/key_color = Vector4(0, 1, 0, 0)
+shader_parameter/similarity = 0.4
+shader_parameter/smoothness = 0.08
+shader_parameter/spill = 0.1
+
+[node name="transitionRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="transitionVideo" type="VideoStreamPlayer" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_1l4x3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_jqrec")
+expand = true
+script = ExtResource("3_1l4x3")

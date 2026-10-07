@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cgsqq6aj6rvn3"]
+
+[ext_resource type="Shader" uid="uid://yluhhb1gw16w" path="res://makoto_assets/cards/frames/hsv.gdshader" id="1_6necy"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_6necy")
+shader_parameter/h = 0.650000030875
+shader_parameter/s = 2.400000114
+shader_parameter/v = 1.468

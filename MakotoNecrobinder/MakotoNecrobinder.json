@@ -1,0 +1,15 @@
+﻿{
+  "id": "MakotoNecrobinder",
+  "name": "MakotoNecrobinder",
+  "author": "thunninoi",
+  "description": "Makoto Yuki From Arknights (P3R collab) as The Necrobinder",
+  "version": "v1.0.0",
+  "min_game_version": "0.107.1",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [
+    {"id": "BaseLib", "min_version": "3.4.7"},
+    {"id": "thunninoiSkinManager", "min_version": "1.0.0"}
+  ],
+  "affects_gameplay": false
+}

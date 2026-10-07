@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2m064qsif4gj"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b03g0gwxyje37" path="res://MakotoNecrobinder/assets/sees/character_visuals/sprites/makoto.tres" id="1_2cy7g"]
+[ext_resource type="Script" uid="uid://g708qutoxws6" path="res://MakotoNecrobinderCode/Core/Mkt_MerchantCharacter.cs" id="2_2o5xp"]
+
+[node name="MakotoMerchant" type="Node2D"]
+script = ExtResource("2_2o5xp")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_2cy7g")
+preview_skin = "Default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 5.4
+scale = Vector2(0.95, 0.95)

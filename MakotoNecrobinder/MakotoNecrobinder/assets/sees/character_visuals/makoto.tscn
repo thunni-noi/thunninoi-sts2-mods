@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://pixnynqvsaq2"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b03g0gwxyje37" path="res://MakotoNecrobinder/assets/sees/character_visuals/sprites/makoto.tres" id="1_bu75b"]
+[ext_resource type="Script" uid="uid://wnovfo4urghh" path="res://MakotoNecrobinderCode/Core/Mkt_CreatureVisuals.cs" id="1_huhis"]
+[ext_resource type="Script" uid="uid://chkm6m232rel5" path="res://MakotoNecrobinderCode/Helper/SpineFPSlimit.gd" id="2_8l1k5"]
+
+[node name="Makoto" type="Node2D"]
+script = ExtResource("1_huhis")
+metadata/_edit_group_ = true
+
+[node name="FormVfx" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -2.0
+offset_right = -2.0
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_bu75b")
+preview_skin = "Default"
+preview_animation = "cast"
+preview_frame = false
+preview_time = 0.3
+unique_name_in_owner = true
+position = Vector2(-2, -6)
+scale = Vector2(0.71, 0.71)
+script = ExtResource("2_8l1k5")
+metadata/_edit_lock_ = true
+
+[node name="summonVfx" type="Marker2D" parent="Visuals"]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(94.366196, -276.05634)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -105.0
+offset_top = -270.0
+offset_right = 105.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(3, -191)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -326)

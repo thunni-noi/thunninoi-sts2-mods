@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://crno8o3bdv4w6"]
+
+[ext_resource type="Texture2D" uid="uid://bn08in5arys8j" path="res://MakotoNecrobinder/assets/sees/char_select/select_bg.png" id="1_sqdwt"]
+[ext_resource type="Texture2D" uid="uid://bfx6qoytt5tvk" path="res://MakotoNecrobinder/assets/sees/char_select/makoto_e2.png" id="2_v4q5m"]
+
+[node name="SilentBg" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -521.0
+offset_right = 1600.0
+offset_bottom = 679.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+
+[node name="SelectBg" type="Sprite2D" parent="."]
+position = Vector2(924, 516.00006)
+scale = Vector2(1.4177777, 1.4177778)
+texture = ExtResource("1_sqdwt")
+
+[node name="MakotoE2" type="Sprite2D" parent="."]
+position = Vector2(1440, 470.9999)
+scale = Vector2(1.3474722, 1.3474721)
+texture = ExtResource("2_v4q5m")

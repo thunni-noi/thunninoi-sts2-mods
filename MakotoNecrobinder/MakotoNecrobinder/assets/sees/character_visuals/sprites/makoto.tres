@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://b03g0gwxyje37"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bcgogm4nn8sdq" path="res://MakotoNecrobinder/assets/sees/character_visuals/sprites/makoto_sprite.atlas" id="1_pbmd0"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bxn8upju48lq4" path="res://MakotoNecrobinder/assets/sees/character_visuals/sprites/makoto_base.spine-json" id="2_o4mdm"]
+
+[resource]
+atlas_res = ExtResource("1_pbmd0")
+skeleton_file_res = ExtResource("2_o4mdm")
