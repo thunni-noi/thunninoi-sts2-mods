@@ -1,6 +1,8 @@
-﻿using Godot;
+﻿using System.Runtime.CompilerServices;
+using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Characters;
@@ -8,57 +10,37 @@ using thunninoiSkinManager.thunninoiSkinManagerCode;
 
 namespace MakotoNecrobinder.MakotoNecrobinderCode.Patches;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(CreatureCmd), nameof(CreatureCmd.TriggerAnim))]
 public class EvokerSfx
 {
-    private static CreatureAnimator? _necrobinderAnimator;
-    private static Creature? _necrobinderCreature;
-    
-    internal static void TagAnimator(CharacterModel model, CreatureAnimator animator, Creature creature)
-    {
-        
-        if (model is not Necrobinder) return;
-        _necrobinderAnimator = animator;
-        _necrobinderCreature = creature;
-    }
-    [HarmonyPatch(typeof(CreatureAnimator), "SetNextState")]
     [HarmonyPostfix]
-    static void Postfix(CreatureAnimator __instance, AnimState state)
+    private static void Postfix(Creature creature, string triggerName)
     {
-        if (__instance != _necrobinderAnimator) return;
+        if (!creature.IsPlayer || creature.IsDead) return;
+        if (creature?.Player?.Character is not Necrobinder) return;
         if (!SkinRegistry.IsUsingSkin(ModelDb.Character<Necrobinder>().Id, "seesmakoto")) return;
-        if (state.Id == "cast")
-        {
-            castAnim(0);
-        }
-        else if (state.Id == "cast_mighty") castAnim(0.5);
+        
+        if (triggerName == "summonTrigger") castAnim(creature, 0);
+        else if (triggerName == "Cast") castAnim(creature, 0.5);
     }
 
-    static void castAnim(double delays)
+    static void castAnim(Creature target, double delays)
     {
         if (delays <= 0)
         {
-            playAnim();
+            playAnim(target);
             return;
         }
         
         if (Engine.GetMainLoop() is SceneTree tree)
-            tree.CreateTimer(delays).Timeout += playAnim;
+            tree.CreateTimer(delays).Timeout += () => playAnim(target);
     }
 
-    static void playAnim()
+    static void playAnim(Creature target)
     {
         MktAudio.Sound.Play(volumeMult: (float) MktConfig.EvokerSfxVolume / 100);
-        if (_necrobinderCreature != null) VfxHelper.PlayPersonaVfx(_necrobinderCreature);
+        VfxHelper.PlayPersonaVfx(target);
     }
 }
 
-[HarmonyPatch(typeof(CharacterModel), nameof(CharacterModel.GenerateAnimator))]
-internal static class TagAnimatorWithCreature
-{
-    private static bool Prepare() => Mkt_init.IsBeta();
 
-    [HarmonyPostfix]
-    private static void Postfix(CharacterModel __instance, Creature creature, CreatureAnimator __result)
-        => EvokerSfx.TagAnimator(__instance, __result, creature);
-}
