@@ -16,30 +16,30 @@ public class SkinSelectorInjector
     private const String scenePath = "res://thunninoiSkinManager/SkinSelector.tscn";
     
     [HarmonyPostfix]
-    private static void Postfix(NCharacterSelectScreen __instance, CharacterModel characterModel)
+    private static void Postfix(NCharacterSelectScreen __instance, NCharacterSelectButton charSelectButton)
     {
         Node? existedSkinSelector = __instance.GetNodeOrNull("SkinSelector");
-        __instance.RemoveChildSafely(existedSkinSelector);
+        if (existedSkinSelector != null)
+        {
+            __instance.RemoveChildSafely(existedSkinSelector);
+            existedSkinSelector.QueueFree();
+        }
 
-        if (characterModel is RandomCharacter) return;
-        Control bgContainer = __instance.GetNode<Control>("AnimatedBg");
+        if (charSelectButton.IsRandom) return;
+        
+        CharacterModel selectedChar = charSelectButton.Character;
+        // Control bgContainer = __instance.GetNode<Control>("AnimatedBg");
         PackedScene scene = ResourceLoader.Load<PackedScene>(scenePath);
         SkinSelector skinSelector = scene.Instantiate<SkinSelector>();
 
         skinSelector.Position = new Vector2(910, 710);
         //skinSelector.Scale = new Vector2(0.7f, 0.7f);
-        skinSelector.characterModel = characterModel;
-        skinSelector.characterId = characterModel.Id;
+        skinSelector.characterModel = selectedChar;
+        skinSelector.characterId = selectedChar.Id;
         
 
         __instance.AddChildSafely(skinSelector);
         
         // portrait button
-        HBoxContainer? portraitRow =  __instance.GetNode<HBoxContainer>("CharSelectButtons/ButtonContainer/DEFECT_button/PlayerIconContainer");
-        foreach (Node child in portraitRow.GetChildren())
-        {
-            modEntry.Logger.Info("Button: " + child.Name + "-->" + child.GetType());
-        }
-        
     }
 }
